@@ -1,0 +1,51 @@
+{% extends "base.html.twig" %}
+{% block style %}<link href="css/main.css" rel="stylesheet"> {% endblock %}
+{% block title %} {{ parent() }} A propos {% endblock %}  
+
+{% block contenu %}
+
+
+    <form class="form-signin">   
+        <h1 class="h1 mb-3 font-weight-normal"> </h1>
+
+        <center>
+            <h2>A propos</h2>
+        </center>
+
+
+        <h3 style="text-align:right">A propos de moi :</h3>
+        <h1 style="text-align:right">Théo TELLIEZ</h1>
+
+
+        <p style="text-align:right"><span class="image right"><img src="images/moi.jpg" height="220" alt="" /></span>Étudiant à l'EPSI d'ARRAS, j'ai créé ce site internet à la suite d'un projet PHP donné fin Novembre 2019. Ce site est donc un projet sur lequel les apprenants de ma promotion ainsi que moi-même devaient travailler pour réaliser un site basé sur l'apprentissage.
+            J'ai imaginé, élaboré, dessiné puis mis en oeuvre ce projet qui se base sur l'apprentissage de connaissances sur le thème du VTT, ce sport qui est une de mes passions et que je pratique depuis de nombreuses années. Ce site fut l'occasion pour moi de m'épanouir dans un domaine que j'aime pratiquer, le développement WEB, et de le mettre en relation avec ce loisir, cette passion qui m'est chère.</p>
+
+
+        <h1 class="h1 mb-3 font-weight-normal"> </h1>    
+
+        <h3 style="text-align:left">A propos de l'EPSI :</h3>
+        <h1 style="text-align:left">L’école d’ingénierie informatique</h1>
+
+
+        <p style="text-align:left"><span class="image left"><img src="images/epsi.jpg" height="210" alt="" /></span>L’informatique accélère le temps, modifie notre perception de l’espace, révolutionne nos modes de communication, contribue à notre évolution sociétale ; ce sont les professionnels de l’informatique qui anticipent et accompagnent ces mutations.<br />
+
+            Première école d’informatique en France avoir été créée par des professionnels, résolument engagée auprès des entreprises, l’EPSI accompagne le développement des compétences informatiques depuis plus de 55 ans.<br />
+
+            Elle le fait en partageant avec ses étudiants et diplômés des valeurs et attitudes fortes : s’épanouir, être ouvert sur le monde, être responsable et solidaire, être en prise avec la réalité des entreprises, oser, innover, entreprendre.</p>
+
+        <h1 style="text-align:left"><br /><br /><br />La localisation de l'école</h1>
+
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2549.5342091781636!2d2.77433831589154!3d50.28195520737224!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47dd487845568845%3A0x33931a8d4d844af!2sEPSI%20Arras!5e0!3m2!1sfr!2sfr!4v1576000102467!5m2!1sfr!2sfr" width="100%" height="300" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+
+        <h1 class="h1 mb-3 font-weight-normal"> </h1>
+        <h1 class="h1 mb-3 font-weight-normal"> </h1>
+
+    </form>
+
+
+{% endblock %}
+
+{#Ligne 2513 la class image left dans me main.css#}
+
+{#La propriété margin définit la taille des marges sur les quatre côtés de l'élément. 
+C'est une propriété raccourcie qui permet de manipuler les autres propriétés de marges : margin-top, margin-right, margin-bottom et margin-left.#}

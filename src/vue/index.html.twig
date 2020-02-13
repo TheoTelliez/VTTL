@@ -1,0 +1,112 @@
+{% extends "base.html_1.twig" %}
+{% block style %}<link href="css/main.css" rel="stylesheet"> {% endblock %}
+{% block title %} {{ parent() }} Index {% endblock %}  
+
+{% block contenu %}
+
+    <!-- Banner -->
+    <!--
+            Note: To show a background image, set the "data-bg" attribute below
+            to the full filename of your image. This is used in each section to set
+            the background image.
+    -->
+    <section id="banner" class="bg-img" data-bg="banner.jpg">
+        <div class="inner">
+            <header>
+                <h1>VTT Learning</h1>
+            </header>
+            <h2>     </h2>
+            <ul class="actions special">
+
+                <li><a href="#" class="button primary">Commencer à apprendre</a></li>
+            </ul>
+
+        </div>
+        <a href="#one" class="more">Nos avis</a>
+    </section>
+
+    <!-- One -->
+    <section id="one" class="wrapper post bg-img" data-bg="banner1.jpg">
+        <div class="inner">
+            <article class="box">
+                {% for c in listedernier %}   
+                    <header>
+                        <h2 style="color:#348f00;">{{c.titre}}</h2>
+                        <h4>{{c.date|date("d/m/Y")}} | Avis de {{c.prenom}} : </h4>
+                        <h4>Note attribuée au site : {{c.note}}/5</h4>
+                    </header>
+                    <div class="content">
+                        <p>{{c.message}}</p>
+                    </div>
+                {% endfor %}
+            </article>
+
+        </div>
+        <a href="#two" class="more">Suite</a>
+    </section>
+
+
+
+    <!-- Two -->
+    <section id="two" class="wrapper post bg-img" data-bg="banner2.jpg">
+        <div class="inner">
+            <article class="box">
+                {% for c in listedernier1 %}   
+                    <header>
+                        <h2 style="color:#348f00;">{{c.titre}}</h2>
+                        <h4>{{c.date|date("d/m/Y")}} | Avis de {{c.prenom}} : </h4>
+                        <h4>Note attribuée au site : {{c.note}}/5</h4>
+                    </header>
+                    <div class="content">
+                        <p>{{c.message}}</p>
+                    </div>
+                {% endfor %}
+            </article>
+        </div>
+        <a href="#three" class="more">Suite</a>
+    </section>
+
+
+
+    <!-- Three -->
+    <section id="three" class="wrapper post bg-img" data-bg="banner3.jpg">
+        <div class="inner">
+            <article class="box">
+                {% for c in listedernier2 %}   
+                    <header>
+                        <h2 style="color:#348f00;">{{c.titre}}</h2>
+                        <h4>{{c.date|date("d/m/Y")}} | Avis de {{c.prenom}} : </h4>
+                        <h4>Note attribuée au site : {{c.note}}/5</h4>
+                    </header>
+                    <div class="content">
+                        <p>{{c.message}}</p>
+                    </div>
+                {% endfor %}
+            </article>
+        </div>
+        <a href="#four" class="more">Suite</a>
+    </section>
+
+
+
+    <!-- Four -->
+    <section id="four" class="wrapper post bg-img" data-bg="banner4.jpg">
+        <div class="inner">
+            <article class="box">
+                {% for c in listedernier3 %}   
+                    <header>
+                        <h2 style="color:#348f00;">{{c.titre}}</h2>
+                        <h4>{{c.date|date("d/m/Y")}} | Avis de {{c.prenom}} : </h4>
+                        <h4>Note attribuée au site : {{c.note}}/5</h4>
+                    </header>
+                    <div class="content">
+                        <p>{{c.message}}</p>
+                    </div>
+                {% endfor %}
+            </article>
+        </div>
+    </section>
+
+
+
+{% endblock %}

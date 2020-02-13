@@ -1,0 +1,42 @@
+{% extends "base.html.twig" %}
+{% block style %}<link href="css/main.css" rel="stylesheet"> {% endblock %}
+{% block title %} {{ parent() }} Contact Admin {% endblock %}  
+
+{% block contenu %}
+    {% if form.valide is defined %}
+        {% if form.valide == true %}
+            <h1 class="h3 mb-3 font-weight-normal">{{ form.message }}</h1>
+        {% else %}
+            <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1>
+        {% endif %}
+    {% endif %} 
+
+    <h1 class="h1 mb-3 font-weight-normal"> </h1>
+
+    <center>
+
+        <h2>Contact Administrateur</h2>
+        <h3>Liste des messages provenant du formulaire de contact :</h3>
+
+        <h1 class="h1 mb-3 font-weight-normal"> </h1>
+
+        <div class="table-responsive">
+            <table class="table table-hover table-striped">
+                <tr><th>Date</th><th>Email</th><th>Nom</th><th>Prénom</th><th>Message</th><th>Édition</th></tr>
+                        {% for c in liste %}
+                    <tr><td>{{c.date|date("d/m/Y")}}</td><td>{{c.email}}</td><td>{{c.nom}}</td><td>{{c.prenom}}</td><td>{{c.message}}</td><td><a href="index.php?page=contactadmin&id={{c.id}}" class="icon fa-trash"><span class="label">Supprimer</span></a><a></a>     <a href="mailto:{{c.email}}" class="icon fa-reply"><span class="label">Répondre</span></a></td></tr>
+                {% endfor %}
+            </table>
+
+        </div>
+
+
+    </center>
+
+
+    <p><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
+</form>
+
+
+
+{% endblock %}

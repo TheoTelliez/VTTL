@@ -1,0 +1,85 @@
+{% extends "base.html.twig" %}
+{% block style %}<link href="css/main.css" rel="stylesheet"> {% endblock %}
+{% block title %} {{ parent() }} Modifier un utilisateur {% endblock %}
+
+{% block contenu %}
+
+    {% if form.utilisateur is defined %}
+
+        {% if form.utilisateur != null %}
+            <h1 class="h1 mb-3 font-weight-normal"> </h1>
+
+        <center>
+            <h2>Modification du profil</h2>
+            <h3>Modifier votre profil :</h3>
+            <p>Grâce à ce formulaire, modifier comme bon vous semble votre profil.</p>
+          
+            <form class="form-signin" action="index.php?page=modifprofil" method="post"
+                  enctype="multipart/form-data">
+                <h1 class="h1 mb-3 font-weight-normal">Modifier :</h1>
+
+                <h1 class="h1 mb-3 font-weight-normal"> </h1>
+
+                <label for="inputModifPassword" class="sr-only">Mot de passe:</label>
+                <input type="password" id="inputModifPassword" name="inputModifPassword" class="form-control"
+                       placeholder="Modifier le mot de passe" value="{{form.utilisateur.mdp}}">
+
+                <label for="inputModifPassword2" class="sr-only">Mot de passe:</label>
+                <input type="password" id="inputModifPassword2" name="inputModifPassword2" class="form-control"
+                       placeholder="Confirmation mot de passe">
+
+                <label for="inputModifSurname" class="sr-only">Nom:</label>
+                <input type="text" id="inputModifSurname" name="inputModifSurname" class="form-control"
+                       placeholder="Nom" value="{{form.utilisateur.nom}}" required autofocus>
+
+                <label for="inputModifName" class="sr-only">Prénom:</label>
+                <input type="text" id="inputModifName" name="inputModifName" class="form-control"
+                       placeholder="Prénom" value="{{form.utilisateur.prenom}}" required autofocus>
+
+                <select class="form-control" name="role">
+                    {% for r in form.roles %}
+                        {% if r.id==form.utilisateur.idRole %}
+                            <option value="{{ r.id }}" selected>{{ r.libelle }}</option>
+                        {% else %}
+                            <option value="{{ r.id }}">{{ r.libelle }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+
+                <h3 class="h3 mb-3 font-weight-normal"></h3>
+
+                <input type="hidden" name="email" value="{{ form.utilisateur.email }}"/>
+                <button class="btn btn-lg btn-primary btn-block" type="submit"
+                        name="btModifierVTT" id="btModifierVTT">Modifier</button>
+                <h1 class="h1 mb-3 font-weight-normal"> </h1>
+                <h1 class="h3 mb-3 font-weight-normal"><a style="color:#F64747;" href="index.php?page=profil&email={{ session.login }}">Retourner sur mon profil</a></h1>
+            </form>
+            <br /><br /><br />
+
+        {% else %}
+            <center>
+            <br /><br />
+            <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1>
+            <h1 class="h3 mb-3 font-weight-normal"><a style="color:#F64747;" href="index.php?profil&email={{ session.login }}">Retourner sur mon profil</a></h1>
+            <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+            </center>
+        {% endif %}
+    {% else %}
+        {% if form.valide == true %}
+            <center>
+            <br /><br />
+            <h1 class="h3 mb-3 font-weight-normal">{{ form.message }} </h1>
+            <h1 class="h3 mb-3 font-weight-normal"><a style="color:#F64747;" href="index.php?page=profil&email={{ session.login }}">Retourner sur mon profil</a></h1>
+            <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+            </center>
+        {% else %}
+            <center>
+            <br /><br />
+            <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1>
+            <h1 class="h3 mb-3 font-weight-normal"><a style="color:#F64747;" href="index.php?page=profil&email={{ session.login }}">Retourner sur mon profil</a></h1>
+            <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+            </center>
+        {% endif %}
+
+    {% endif %}
+{% endblock %} 

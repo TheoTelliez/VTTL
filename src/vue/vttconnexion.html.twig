@@ -1,0 +1,62 @@
+{% extends "base.html.twig" %}
+{% block style %}<link href="css/main.css" rel="stylesheet"> {% endblock %}
+{% block title %} {{ parent() }} Connexion {% endblock %}  
+
+{% block contenu %}
+
+    {% if form.valide is defined %}
+        {% if form.valide == true %}
+            <h1 class="h3 mb-3 font-weight-normal">Connexion réussie</h1>
+            <h1 class="h3 mb-3 font-weight-normal">Voici votre identifiant : {{form.email}}</h1>
+            {% if form.role == 1 %}
+                <h1 class="h3 mb-3 font-weight-normal">Vous êtes administrateur du site</h1>
+            {% else %}
+                <h1 class="h3 mb-3 font-weight-normal">Vous êtes un client du site </h1>
+            {% endif %}
+        {% else %}
+            <h1 class="h3 mb-3 font-weight-normal">Echec de la connexion</h1>
+            <h1 class="h3 mb-3 font-weight-normal">Erreur : {{form.message}}</h1>
+            <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=connexion">Retourner sur
+                    la page de connexion</a></h1>
+                {% endif %}
+
+    {% else %} 
+            <h1 class="h1 mb-3 font-weight-normal"> </h1>
+
+            <center>
+
+                <h2>Connexion</h2>
+                <h3>Se connecter sur VTT Learning :</h3>
+
+                <h1 class="h1 mb-3 font-weight-normal"> </h1> 
+
+                <form style ="text-align: center" class="form-signin" action="index.php?page=connexion" method="post"
+                      enctype="application/x-www-form-urlencoded">
+
+                    <label for="inputVTTEmail" class="sr-only">Email:</label>  
+                    <input type="email" id="inputVTTEmail" name="inputVTTEmail" class="form-control"
+                           placeholder="Email" required autofocus>
+
+                    <label for="inputVTTPassword" class="sr-only">Mot de passe:</label> 
+                    <input type="password" id="inputVTTPassword" name="inputVTTPassword" class="form-control" placeholder="Mot de passe" required>
+                    <h3 class="h3 mb-3 font-weight-normal"></h3>    
+            
+            <button class="button special fit" type="submit" name="btVTTConnecter">Se connecter</button>
+            
+            <div style ="text-align: left"> <!-- Ici c'est pour faire en sorte que le lien vers la page d'inscription ne soit pas centré mais agligé à gauche, c'est plus esthétique comme ça-->
+                <h5>Nouveau parmis nous ? <a style="color:#F64747;" href="index.php?page=inscription">S'inscrire</a><br/>
+                Mot de passe oublié ? <a style="color:#F64747;" href="index.php?page=mdpoublie">Réinitialiser</a></h5>
+            </div>
+            
+                <h1 class="h1 mb-3 font-weight-normal"> </h1>
+
+        </form>
+    </center>
+
+
+    <p><br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
+</form>
+
+
+{% endif %}
+{% endblock %}

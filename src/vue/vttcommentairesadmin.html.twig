@@ -1,0 +1,42 @@
+{% extends "base.html.twig" %}
+{% block style %}<link href="css/main.css" rel="stylesheet"> {% endblock %}
+{% block title %} {{ parent() }} Commentaires Admin {% endblock %}  
+
+{% block contenu %}
+    {% if form.valide is defined %}
+        {% if form.valide == true %}
+            <h1 class="h3 mb-3 font-weight-normal">{{ form.message }}</h1>
+        {% else %}
+            <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1>
+        {% endif %}
+    {% endif %} 
+
+    <h1 class="h1 mb-3 font-weight-normal"> </h1>
+
+    <center>
+
+        <h2>Commentaires Administrateur</h2>
+        <h3>Liste des commentaires provenant du formulaire de commentaire :</h3>
+
+        <h1 class="h1 mb-3 font-weight-normal"> </h1>
+
+        <div class="table-responsive">
+            <table class="table table-hover table-striped">
+                <tr><th>Date</th><th>Email</th><th>Nom</th><th>Prénom</th><th>Titre</th><th>Commentaire</th><th>Note</th><th>Édition</th></tr>
+                        {% for c in liste %}
+                    <tr><td>{{c.date|date("d/m/Y")}}</td><td>{{c.email}}</td><td>{{c.nom}}</td><td>{{c.prenom}}</td><td>{{c.titre}}</td><td>{{c.message}}</td><td>{{c.note}}/5</td><td><a href="index.php?page=commentaireadmin&id={{c.id}}" class="icon fa-trash"><span class="label">Supprimer</span></a><a></a>     <a href="mailto:{{c.email}}?cc=&bcc=&subject=Commentaire sur le site VTT Learning&body=Bonjour {{c.nom}} {{c.prenom}},%0D%0A%0D%0AMerci d'avoir pris le temps de mettre un commentaire sur VTT Learning. %0D%0AVotre avis compte beaucoup pour nous. Aussi, nous espérons avoir répondu à vos attentes.%0D%0A%0D%0AA bientôt sur notre site !%0D%0A%0D%0A " class="icon fa-thumbs-up"><span class="label">Répondre</span></a></td></tr>
+                {% endfor %}
+            </table>
+
+        </div>
+
+
+    </center>
+
+
+    <p><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
+</form>
+
+
+
+{% endblock %}

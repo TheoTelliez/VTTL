@@ -1,0 +1,77 @@
+{% extends "base.html.twig" %}
+{% block style %}<link href="css/main.css" rel="stylesheet"> {% endblock %}
+{% block title %} {{ parent() }} Contact {% endblock %}  
+
+{% block contenu %}
+
+    {% if form.valide is defined %}
+        {% if form.valide == true %}
+            <center>
+                <p> <br /><br /><br /></p>
+                <h1 class="h3 mb-3 font-weight-normal">Demande de contact envoyée</h1>
+                <h1 class="h3 mb-3 font-weight-normal">Voici votre email : {{form.inputVTTContactEmail}}</h1>
+                <h1 class="h3 mb-3 font-weight-normal">Voici votre nom : {{form.inputVTTContactNom}}</h1>
+                <h1 class="h3 mb-3 font-weight-normal">Voici votre prénom : {{form.inputVTTContactPrenom}}</h1>
+                <h1 class="h3 mb-3 font-weight-normal">Voici la date de votre demande : {{form.inputVTTContactDate}}</h1>
+                <h1 class="h3 mb-3 font-weight-normal">Voici votre message : {{form.inputVTTContactMessage}}</h1>
+                <p> <br /><h1 class="h3 mb-3 font-weight-normal"><a style="color:#F64747;" href="index.php?page=contact">Retourner sur la page de contact</a></h1><br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
+        </center>
+    {% else %}
+        <center>
+            <h1 class="h3 mb-3 font-weight-normal">Echec de l'envoi de la demande de contact</h1>
+            <h1 class="h3 mb-3 font-weight-normal">Erreur : {{form.message}}</h1>
+            <h1 class="h3 mb-3 font-weight-normal"><a style="color:#F64747;" href="index.php?page=contact">Retourner sur la page de contact</a></h1>
+            <p> <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
+        </center>
+    {% endif %}
+
+{% else %} 
+
+    <h1 class="h1 mb-3 font-weight-normal"> </h1>
+
+    <center>
+        <h2>Contact</h2>
+        <h3>Me contacter :</h3>
+        <p>Grâce à ce formulaire, envoyez-moi directement <a href="mailto:theo.telliez@epsi.fr"> un email</a> à propos de votre projet.<br /> Notez également que à chaque bas de page, vous avez des liens de redirection vers nos différents réseaux sociaux.<br /> Je vous contacte en retour dès que possible.</p>
+        <form name="contact" style ="text-align: center" class="form-signin" action="index.php?page=contact" method="post"
+              enctype="application/x-www-form-urlencoded">
+            <h1 class="h1 mb-3 font-weight-normal">Formulaire de contact :</h1>
+
+            <h1 class="h1 mb-3 font-weight-normal"> </h1>
+
+            <label for="inputVTTContactNom" class="sr-only">Nom:</label>
+            <input type="text" id="inputVTTContactNom" name="inputVTTContactNom" class="form-control"
+                   placeholder="Nom" required autofocus>
+
+            <label for="inputVTTContactPrenom" class="sr-only">Prénom:</label>
+            <input type="text" id="inputVTTContactPrenom" name="inputVTTContactPrenom" class="form-control"
+                   placeholder="Prénom" required autofocus>
+
+            <label for="inputVTTContactEmail" class="sr-only">Email:</label>
+            <input type="email" id="inputVTTContactEmail" name="inputVTTContactEmail" class="form-control"
+                   placeholder="Email" required autofocus>
+
+            <label for="inputVTTContactDate" class="sr-only">Date:</label>
+            <input type="text" id="inputVTTContactDate" name="inputVTTContactDate" class="form-control"
+                   placeholder="Date (cliquez)" required autofocus onClick=" window.open('pop.php?frm=contact&ch=inputVTTContactDate','calendrier','width=350,height=160,scrollbars=0').focus();">
+
+            <label for="inputVTTContactMessage" class="sr-only">Message</label>
+            <textarea class="form-control" rows="8" name="inputVTTContactMessage" id="inputVTTContactMessage" type="message"
+                      placeholder="Message" required autofocus></textarea>
+
+
+            <h3 class="h3 mb-3 font-weight-normal"></h3>
+
+            <button class="btn btn-lg btn-primary btn-block" type="submit"
+                    name="btVTTContact" id="btInscrire2">Envoyer</button>
+            <h1 class="h1 mb-3 font-weight-normal"> </h1>
+            <h1 class="h1 mb-3 font-weight-normal"> </h1>
+
+
+        </form>
+    </center>
+    <h1 class="h1 mb-3 font-weight-normal"> </h1>
+
+
+{% endif %}
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends "base.html.twig" %}
+{% block style %}<link href="css/main.css" rel="stylesheet"> {% endblock %}
+{% block title %} {{ parent() }} Ajout de commentaire(s) {% endblock %}  
+
+{% block contenu %}
+
+    {% if form.valide is defined %}
+        {% if form.valide == true %}
+            <center>
+                <p> <br /><br /><br /></p>
+                <h1 class="h3 mb-3 font-weight-normal">Commentaire envoyé</h1>
+                <h1 class="h3 mb-3 font-weight-normal">Voici votre email : {{form.inputVTTCommentaireidUtilisateur}}</h1>
+                <h1 class="h3 mb-3 font-weight-normal">Voici la date de votre commentaire : {{form.inputVTTCommentaireDate}}</h1>
+                <h1 class="h3 mb-3 font-weight-normal">Voici le titre de votre commentaire : {{form.inputVTTCommentaireTitre}}</h1>
+                <h1 class="h3 mb-3 font-weight-normal">Voici votre commentaire : {{form.inputVTTCommentaireMessage}}</h1>
+                <p> <br /><h1 class="h3 mb-3 font-weight-normal"><a style="color:#F64747;" href="index.php?page=commentaire">Retourner sur la page de commentaire</a></h1><br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
+        </center>
+    {% else %}
+        <center>
+            <h1 class="h3 mb-3 font-weight-normal">Echec de l'envoi du commentaire</h1>
+            <h1 class="h3 mb-3 font-weight-normal">Erreur : {{form.message}}</h1>
+            <h1 class="h3 mb-3 font-weight-normal"><a style="color:#F64747;" href="index.php?page=commentaire">Retourner sur la page de commentaire</a></h1>
+            <p> <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
+        </center>
+    {% endif %}
+
+{% else %}
+
+    <h1 class="h1 mb-3 font-weight-normal"> </h1>
+
+    <center>
+        <h2>Commentaire</h2>
+        <h3>Insérer un commentaire :</h3>
+        <p>Vous pouvez mettre un commentaire sur mon site, chaque commentaire est unique alors n'hésitez pas !<br /> Celui-ci apparaitra sur la page d'accueil si il est récent.</p>
+        <form name="commentaires" style ="text-align: center" class="form-signin" action="index.php?page=commentaire" method="post"
+              enctype="application/x-www-form-urlencoded">
+            <h1 class="h1 mb-3 font-weight-normal">Pour mettre un commentaire, merci de remplir ce formulaire :</h1>
+
+            <h1 class="h1 mb-3 font-weight-normal"> </h1>
+
+            <label for="inputVTTCommentaireidUtilisateur" class="sr-only">Email:</label>
+            <input type="email" id="inputVTTCommentaireidUtilisateur" name="inputVTTCommentaireidUtilisateur" class="form-control"
+                   placeholder="Email" required autofocus>
+
+            <label for="inputVTTCommentaireTitre" class="sr-only">Titre:</label>
+            <input type="text" id="inputVTTCommentaireTitre" name="inputVTTCommentaireTitre" class="form-control"
+                   placeholder="Titre" required autofocus>
+
+            <label for="inputVTTCommentaireDate" class="sr-only">Date:</label>
+            <input type="text" id="inputVTTCommentaireDate" name="inputVTTCommentaireDate" class="form-control"
+                   placeholder="Date (cliquez)" required autofocus onClick=" window.open('pop.php?frm=commentaires&ch=inputVTTCommentaireDate','calendrier','width=350,height=160,scrollbars=0').focus();">
+
+            <label for="inputVTTCommentaireMessage" class="sr-only">Commentaire</label>
+            <textarea class="form-control" rows="8" name="inputVTTCommentaireMessage" id="inputVTTCommentaireMessage" type="message"
+                      placeholder="Commentaire" required autofocus></textarea>
+
+            <label for="inputVTTCommentaireNote" class="sr-only">Note:</label>
+            <input type="text" id="inputVTTCommentaireNote" name="inputVTTCommentaireNote" class="form-control"
+                   placeholder="Note /5" required autofocus>
+
+
+
+
+            <h3 class="h3 mb-3 font-weight-normal"></h3>
+
+            <button class="btn btn-lg btn-primary btn-block" type="submit"
+                    name="btVTTCommentaires" id="btVTTCommentaires">Envoyer</button>
+            <h1 class="h1 mb-3 font-weight-normal"> </h1>
+            <h1 class="h1 mb-3 font-weight-normal"> </h1>
+    </center>
+
+
+    <h1 class="h1 mb-3 font-weight-normal"> </h1>
+</form>
+
+
+{% endif %}      
+
+{% endblock %}

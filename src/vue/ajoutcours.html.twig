@@ -1,0 +1,64 @@
+{% extends "base.html.twig" %}
+{% block style %}<link href="css/main.css" rel="stylesheet"> {% endblock %}
+{% block title %} {{ parent() }} Ajout d'un cours {% endblock %}  
+
+{% block contenu %}
+
+    {% if form.valide is defined %}
+        {% if form.valide == true %}
+            <h1 class="h3 mb-3 font-weight-normal">Demande envoyée</h1> 
+            <h1 class="h3 mb-3 font-weight-normal">Voici votre titre : {{form.inputTitre}}</h1>
+            <h1 class="h3 mb-3 font-weight-normal">Voici vos sous titre : {% for ist in form.inputSousTitre %}{{ ist }}{% endfor %}</h1>
+            <h1 class="h3 mb-3 font-weight-normal">Voici votre contenu : {% for ic in form.inputContenu %}{{ ic }}{% endfor %}</h1>
+        {% else %}
+            <h1 class="h3 mb-3 font-weight-normal">Echec de l'envoi</h1>
+            <h1 class="h3 mb-3 font-weight-normal">Erreur : {{form.message}}</h1>
+            <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=ajoutcours">Retourner sur la page d'ajout</a></h1>
+        {% endif %}
+
+    {% else %} 
+
+        <h1 class="h1 mb-3 font-weight-normal"> </h1>
+
+        <center>
+            <h2>Ajouter un cours</h2>
+
+            <h3>Ajouter un cours via ce formulaire :</h3>
+
+            <h1 class="h1 mb-3 font-weight-normal"> </h1> 
+
+            <form class="form-signin" action="index.php?page=ajoutcours" method="post"
+                  enctype="application/x-www-form-urlencoded">
+
+
+                <label for="inputTitre" class="sr-only">Titre</label>
+                <input type="text" id="inputTitre" name="inputTitre" class="form-control"
+                       placeholder="Saisir le titre du cours" >
+
+                <br/>
+                {% for i in 1..nb %}
+                    <label for="inputSousTitre" class="sr-only">Sous titre</label>
+                    <input type="text" id="inputSousTitre" name="inputSousTitre[]" class="form-control"
+                           placeholder="Saisir un sous titre {{ i }}" >
+
+                    <label for="inputContenu" class="sr-only">Contenu</label>
+                    <textarea class="form-control" rows="10" name="inputContenu[]" id="inputContenu"
+                              placeholder="Saisir le cours {{ i }}" ></textarea>
+                    <br/>
+                {% endfor %}
+                
+                <input type="hidden" id="inputNbTitre" name="inputNbTitre" value="{{ nb }}" class="form-control">
+                
+                <button class="button special fit" type="submit" name="btAjoutCours" id="btAjoutCours">Ajouter le cours</button>
+                <button class="button special fit" type="submit" name="btAjoutSection" id="btAjoutSection">Ajouter section</button>
+                
+                
+
+            </form>
+            <br/><br/><br/><br/>
+
+        </center>
+
+
+    {% endif %}
+{% endblock %}

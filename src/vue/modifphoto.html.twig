@@ -1,0 +1,93 @@
+{% extends "base.html.twig" %}
+{% block style %}<link href="css/main.css" rel="stylesheet"> {% endblock %}
+{% block title %} {{ parent() }} Modifier votre photo {% endblock %}
+
+{% block contenu %}
+    {% if form.utilisateur is defined %}
+
+        {% if form.utilisateur != null %}
+
+            <h1 class="h1 mb-3 font-weight-normal"> </h1>
+
+            <center>
+                <h2>Édition de la photo de profil</h2>
+                <h3>Modifier votre photo de profil :</h3>
+                <p>Sur cette page, modifier ou supprimez comme bon vous semble votre photo profil.</p>
+            </center>
+
+            <div id="main" class="container">
+
+                <!-- Contenu -->
+                <div class="row">
+                    <div style="text-align: left" class="6u 12u small">
+                        <h3>Ma photo de profil :</h3>
+                        {% if form.utilisateur.photo is not empty %}
+                            <img height="400" src="images/{{form.utilisateur.photo}}" alt="" /><br />
+                        {% endif %} 
+
+
+                    </div>
+                    <div style="text-align: right" class="6u$ 12u/(small)">
+                        <h3></h3>
+                        <br /><br /><br />
+                        <form class="form-signin" action="index.php?page=modifphoto" method="post"
+                              enctype="multipart/form-data">
+                            <button class="button fit alt icon fa-exchange">Changer la photo <br /></button>
+
+
+                            <div style ="text-align: left">
+                                <label for="photo" class="sr-only">Photo :</label>
+                                <input type="file" name="photo" id="photo" class="form-control"/>
+                            </div>
+
+                            <br /><br />
+
+
+                            <button name="btPhotoSupp" id="btPhotoSupp" class="button fit alt icon fa-eraser">Supprimer ma photo</button>
+                            <br /><br />
+                            <button class="button fit special icon fa-check" type="submit" name="btPhotoValider" id="btPhotoValider">Valider les modifications</button>
+                            <br />
+                            <center>
+                                <h1 class="h3 mb-3 font-weight-normal"><a style="color:#F64747;" href="index.php?page=profil&email={{ session.login }}">Retourner sur mon profil</a></h1>
+                            </center>
+                            <br />
+                            <input type="hidden" name="email" value="{{ form.utilisateur.email }}"/>
+                        </form>
+                    </div>
+
+                    <br /><br /><br />
+
+                    <h1 class="h1 mb-3 font-weight-normal"> </h1>
+
+                </div>
+                <br />
+            </div>
+        {% else %}
+            <center>
+                <br /><br />
+                <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1>
+                <h1 class="h3 mb-3 font-weight-normal"><a style="color:#F64747;" href="index.php?profil&email={{ session.login }}">Retourner sur mon profil</a></h1>
+                <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+            </center>
+        {% endif %}
+    {% else %}
+        {% if form.valide == true %}
+            <center>
+                <br /><br />
+                <h1 class="h3 mb-3 font-weight-normal">{{ form.message }} </h1>
+                <h1 class="h3 mb-3 font-weight-normal"><a style="color:#F64747;" href="index.php?page=profil&email={{ session.login }}">Retourner sur mon profil</a></h1>
+                <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+            </center>
+        {% else %}
+            <center>
+                <br /><br />
+                <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1>
+                <h1 class="h3 mb-3 font-weight-normal"><a style="color:#F64747;" href="index.php?page=profil&email={{ session.login }}">Retourner sur mon profil</a></h1>
+                <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+            </center>
+        {% endif %}
+
+    {% endif %}
+
+
+{% endblock %} 

@@ -1,0 +1,94 @@
+{% extends "base.html.twig" %}
+{% block style %}<link href="css/main.css" rel="stylesheet"> {% endblock %}
+{% block title %} {{ parent() }} Inscription {% endblock %}  
+
+{% block contenu %}
+
+    {% if form.valide is defined %}
+        {% if form.valide == true %}
+            <center>
+            <h1 class="h3 mb-3 font-weight-normal">Inscription réussie</h1>
+            <h1 class="h3 mb-3 font-weight-normal">Voici votre identifiant : {{form.email}}</h1>
+            </center>
+            {% if form.role == 1 %}
+                <center>
+                <h1 class="h3 mb-3 font-weight-normal">Vous êtes administrateur du site</h1>
+                </center>
+            {% else %}
+                <center>
+                <h1 class="h3 mb-3 font-weight-normal">Vous êtes un client du site </h1><p> <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
+                
+                </center>
+            {% endif %}
+        {% else %}
+            <center>
+            <h1 class="h3 mb-3 font-weight-normal">Echec de l'inscription</h1>
+            <h1 class="h3 mb-3 font-weight-normal">Erreur : {{form.message}}</h1>
+            <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=inscription">Retourner sur
+                    la page d'inscription</a></h1>
+            <p> <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
+            </center>
+                {% endif %}
+
+    {% else %}   
+            <h1 class="h1 mb-3 font-weight-normal"> </h1>
+
+            <center>
+                <h2>Inscription</h2>
+                <h3>S'inscrire sur VTT Learning :</h3>
+                <form  style ="text-align: center" class="form-signin" action="index.php?page=inscription" method="post"
+                       enctype="multipart/form-data">
+
+                    <h1 class="h1 mb-3 font-weight-normal"> </h1>
+
+                    <label for="inputVTTSurname" class="sr-only">Nom:</label>
+                    <input type="text" id="inputVTTSurname" name="inputVTTSurname" class="form-control"
+                           placeholder="Nom" required autofocus>
+
+                    <label for="inputVTTName" class="sr-only">Prénom:</label>
+                    <input type="text" id="inputVTTName" name="inputVTTName" class="form-control"
+                           placeholder="Prénom" required autofocus>
+
+                    <label for="inputVTTEmail" class="sr-only">Email:</label>
+                    <input type="email" id="inputVTTEmail" name="inputVTTEmail" class="form-control"
+                           placeholder="Email" required autofocus>
+
+                    <label for="inputVTTPassword" class="sr-only">Mot de passe:</label>
+                    <input type="password" id="inputVTTPassword" name="inputVTTPassword" class="form-control"
+                           placeholder="Mot de passe" required>
+
+                    <label for="inputVTTPassword2" class="sr-only">Mot de passe:</label>
+                    <input type="password" id="inputVTTPassword2" name="inputVTTPassword2" class="form-control"
+                           placeholder="Confirmation mot de passe" required>
+
+                    <select class="form-control" name="role">
+                        <option value="1">Administrateur</option>
+                        <option value="2">Client</option>
+                    </select>
+                    
+                   
+                    <div style ="text-align: left">
+                        <h5>Choisir une photo de profil :       <label for="photo" class="sr-only">Photo :</label>
+                                                            <input type="file" name="photo" id="photo" class="form-control"/> </h5>
+                        </div>
+                    
+                    
+
+                    <h3 class="h3 mb-3 font-weight-normal"></h3>
+
+                    <button class="button special fit" type="submit" name="btInscrireVTT" id="btInscrire">S'inscrire</button>
+                    <div style ="text-align: left">
+                    <h5>Déja inscrit ? <a style="color:#F64747;" href="http://serveur1.arras-sio.com/symfony4-4059/VTTL/web/index.php?page=connexion">Se connecter</a></h5>
+                    </div>
+                </form>
+                <h1 class="h1 mb-3 font-weight-normal"> </h1>
+                <h1 class="h1 mb-3 font-weight-normal"> </h1>
+            </center>
+
+
+            <h1 class="h1 mb-3 font-weight-normal"> </h1>
+            <h1 class="h1 mb-3 font-weight-normal"> </h1>
+        </form>
+
+    {% endif %}
+{% endblock %}

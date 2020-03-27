@@ -19,15 +19,17 @@
 
                 <!-- Contenu -->
                 <div class="row">
-                    <div style="text-align: left" class="6u 12u small">
+                    <div style="text-align: left" class="col-lg-6 col-sm-12">
                         <h3>Ma photo de profil :</h3>
                         {% if form.utilisateur.photo is not empty %}
-                            <img height="400" src="images/{{form.utilisateur.photo}}" alt="" /><br />
+                            
+                            <img class="image-modif" height="400" src="images/{{form.utilisateur.photo}}"/><br />
+                            
                         {% endif %} 
 
 
                     </div>
-                    <div style="text-align: right" class="6u$ 12u/(small)">
+                    <div style="text-align: right" class="col-lg-6 col-sm-12">
                         <h3></h3>
                         <br /><br /><br />
                         <form class="form-signin" action="index.php?page=modifphoto" method="post"

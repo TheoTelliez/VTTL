@@ -1,0 +1,93 @@
+{% extends "base.html.twig" %}
+{% block style %}<link href="css/main.css" rel="stylesheet"> {% endblock %}
+{% block title %} {{ parent() }} Modifier un cours {% endblock %}
+
+{% block contenu %}
+
+    {% if form.cours is defined %}
+
+        {% if form.cours != null %}
+
+            <div style="text-align: center">
+                <h1 class="h1"> </h1>
+                <h2>Cours</h2>
+                <h3 class="icon fa-pencil"> Modifier le cours <span class="icon fa-pencil"></span></h3>
+                <br/> 
+            </div>
+            <form class="form-signin" action="index.php?page=modifcours" method="post"
+                  enctype="application/x-www-form-urlencoded">
+
+
+
+                <label for="inputModifTitre" class="sr-only">Titre</label>
+                <input type="text" id="inputModifTitre" name="inputModifTitre" class="form-control"
+                       placeholder="Saisir le nouveau titre du cours" value="{{form.cours.titre}}" >
+
+                <select name="modifdifficultecours">
+                    <option value="" disabled>Selectionner la difficulté du cours</option>
+                    {% for c in form.difficulte %}
+                        {% if c.id==form.cours.iddifficulte %}
+                            <option value="{{form.cours.iddifficulte}}" selected>{{ form.cours.libelledifficulte }}</option>
+                        {% else %}
+                            <option value="{{ c.id }}">{{ c.libelle }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+
+                <br/>
+
+                {% for sousti in form.section %}
+                    
+                    <input type="hidden" name="idsoustitre[]" value="{{ sousti.idsoustitre }}"/>
+
+                    <label for="inputModifSousTitre" class="sr-only">Sous titre</label>
+                    <input type="text" id="inputModifSousTitre" name="inputModifSousTitre[]" class="form-control"
+                           placeholder="Saisir le titre du cours" value="{{ sousti.soustitre }}" >
+
+                    <label for="inputModifContenu" class="sr-only">Contenu</label>
+                    <textarea class="form-control" rows="10" name="inputModifContenu[]" id="inputModifContenu"
+                              placeholder="Saisir un contenu" value="{{ sousti.contenu }}" >{{ sousti.contenu }}</textarea><br/>
+
+                {% endfor %}
+
+                
+                
+                <input type="hidden" name="idcours" value="{{ form.cours.idcours }}"/>
+                <input type="hidden" id="inputNbTitre" name="inputNbTitre" value="{{ nb }}" class="form-control">
+
+                <button class="button special fit" type="submit" name="btModifierCours" id="btModifCours">Modifier le cours</button>
+                <br/><br/><br/><br/>
+
+
+
+            </form>
+
+        {% else %}
+            <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1>
+            <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=cours">Retourner sur la liste des cours</a></h1>
+        {% endif %}
+    {% else %}
+        {% if form.valide == true %}
+            <center>
+                <p> <br /><br /><br /></p>
+                <h1 class="h3 mb-3 font-weight-normal">Modification de cours effectuée</h1>
+                <h1 class="h3 mb-3 font-weight-normal">Cours envoyée par : {{form.auteur}}</h1> 
+                <!--<h1 class="h3 mb-3 font-weight-normal">Cours numéro : {{form.idcours}}</h1>-->
+                <h1 class="h3 mb-3 font-weight-normal">Voici le nouveau titre de votre cours : {{form.inputModifTitre}}</h1>
+                <h1 class="h3 mb-3 font-weight-normal">Voici la nouvelle date de publication du cours : {{form.datedernieremodif|date("d/m/Y")}}</h1>
+                <h1 class="h3 mb-3 font-weight-normal">Voici la nouvelle difficulté du cours : {{form.modifdifficultecours.libelle}}</h1>
+                <!--<h1 class="h3 mb-3 font-weight-normal">Voici votre/vos nouveau(x) sous titre(s) : {% for ist in form.inputModifSousTitre %}{{ ist }}{% endfor %}</h1>-->
+                <!--<h1 class="h3 mb-3 font-weight-normal">Voici votre/vos nouveau(x) contenu(s) : {% for ic in form.inputModifContenu %}{{ ic }}{% endfor %}</h1>-->
+                <p> <br /><h1 class="h3 mb-3 font-weight-normal"><a style="color:#F64747;" href="index.php?page=cours">Voir la liste des cours</a></h1><br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
+        </center>
+    {% else %}
+        <center>
+            <h1 class="h3 mb-3 font-weight-normal">Echec lors de la modification du cours</h1>
+            <h1 class="h3 mb-3 font-weight-normal">Erreur : {{form.message}}</h1>
+            <h1 class="h3 mb-3 font-weight-normal"><a style="color:#F64747;" href="index.php?page=cours">Retourner sur la liste des cours</a></h1>
+            <p> <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
+        </center>
+    {% endif %}
+
+{% endif %}
+{% endblock %} 

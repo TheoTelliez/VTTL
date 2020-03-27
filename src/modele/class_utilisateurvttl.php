@@ -14,6 +14,9 @@ class Utilisateurvttl {
     private $updateconnect;
     private $updaterecup;
     private $updatemdp;
+    private $rechercher;
+    private $updatevalide;
+    private $updatevalidecompte;
 
 //    private $selectByEmailPhoto;
 
@@ -21,22 +24,25 @@ class Utilisateurvttl {
 
     public function __construct($db) {  //c'est le constructeur qui s'exécute quand on fait un new UtilisateurVTTL ($utilisateurVTTL = new UtilisateurVTTL($db);) dans le controleur_utilisateur
         $this->db = $db;    //je parle à db dans le private et je lui donne la valeur qui est dans le __construct
-        $this->insert = $db->prepare("insert into utilisateurvttl(email, mdp, nom, prenom, idRole, photo, dateinscription, datedernier) values (:email, :mdp, :nom, :prenom, :role, :photo, :dateinscription, :datedernier)");
+        $this->insert = $db->prepare("insert into utilisateurvttl(email, mdp, nom, prenom, idRole, photo, dateinscription, datedernier, numunique) values (:email, :mdp, :nom, :prenom, :role, :photo, :dateinscription, :datedernier, :numunique)");
         $this->connect = $db->prepare("select email, idRole, mdp from utilisateurvttl where email=:email");
-        $this->select = $db->prepare("select email, id, idRole, photo, nom, prenom, dateinscription, datedernier, r.libelle as libellerole from utilisateurvttl u, rolevttl r where u.idRole = r.id order by nom");
+        $this->select = $db->prepare("select email, id, idRole, photo, nom, prenom, dateinscription, datedernier, numunique, r.libelle as libellerole from utilisateurvttl u, rolevttl r where u.idRole = r.id order by nom");
         $this->delete = $db->prepare("delete from utilisateurvttl where utilisateurvttl.email=:email"); //requette ok
-        $this->selectByEmail = $db->prepare("select email, nom, prenom, idRole, dateinscription, photo, numrecup from utilisateurvttl where email=:email");
+        $this->selectByEmail = $db->prepare("select email, nom, prenom, idRole, dateinscription, photo, numrecup, numunique, valide from utilisateurvttl where email=:email");
         $this->update = $db->prepare("update utilisateurvttl set nom=:nom, prenom=:prenom, mdp=:mdp, idRole=:role, photo=:photo where email=:email");
         $this->updatesansphoto = $db->prepare("update utilisateurvttl set nom=:nom, prenom=:prenom, mdp=:mdp, idRole=:role where email=:email");
         $this->updateuniquementphoto = $db->prepare("update utilisateurvttl set photo=:photo where email=:email");
         $this->updateconnect = $db->prepare("update utilisateurvttl set datedernier=:datedernier where email=:email");
         $this->updaterecup = $db->prepare("update utilisateurvttl set daterecup=:daterecup, numrecup=:numrecup where email=:email");
         $this->updatemdp = $db->prepare("update utilisateurvttl set mdp=:mdp where email=:email");
+        $this->rechercher = $db->prepare("select email, id, idRole, photo, nom, prenom, dateinscription, datedernier, r.libelle as libellerole from utilisateurvttl u, rolevttl r where u.email like :recherche and u.idRole = r.id order by nom");
+        $this->updatevalide = $db->prepare("update utilisateurvttl set numunique=:numunique where email=:email");
+        $this->updatevalidecompte = $db->prepare("update utilisateurvttl set datevalide=:datevalide, valide=:valide where email=:email");
     }
 
-    public function insert($email, $mdp, $role, $nom, $prenom, $photo, $dateinscription, $datedernier) {
+    public function insert($email, $mdp, $role, $nom, $prenom, $photo, $dateinscription, $datedernier, $numunique) {
         $r = true;
-        $this->insert->execute(array(':email' => $email, ':mdp' => $mdp, ':role' => $role, ':nom' => $nom, ':prenom' => $prenom, ':photo' => $photo, ':dateinscription' => $dateinscription, ':datedernier' => $datedernier));  //on exécute les requètes préparés dans le prepare et on affecte les valeurs SQL aux valeurs du formulaire. ATTENTION à l'ordre et à la position !!
+        $this->insert->execute(array(':email' => $email, ':mdp' => $mdp, ':role' => $role, ':nom' => $nom, ':prenom' => $prenom, ':photo' => $photo, ':dateinscription' => $dateinscription, ':datedernier' => $datedernier, ':numunique' => $numunique));  //on exécute les requètes préparés dans le prepare et on affecte les valeurs SQL aux valeurs du formulaire. ATTENTION à l'ordre et à la position !!
         if ($this->insert->errorCode() != 0) {
             print_r($this->insert->errorInfo());
             $r = false;
@@ -117,7 +123,8 @@ class Utilisateurvttl {
         }
         return $r;
     }
-        public function updaterecup($daterecup, $numrecup, $email) {
+
+    public function updaterecup($daterecup, $numrecup, $email) {
         $r = true;
         $this->updaterecup->execute(array(':daterecup' => $daterecup, ':numrecup' => $numrecup, ':email' => $email));
         if ($this->updaterecup->errorCode() != 0) {
@@ -132,6 +139,34 @@ class Utilisateurvttl {
         $this->updatemdp->execute(array(':email' => $email, ':mdp' => $mdp));
         if ($this->updatemdp->errorCode() != 0) {
             print_r($this->updatemdp->errorInfo());
+            $r = false;
+        }
+        return $r;
+    }
+
+    public function rechercher($recherche) {
+        $listerechercheutilisateur = $this->rechercher->execute(array(':recherche' => '%' . $recherche . '%'));
+        if ($this->rechercher->errorCode() != 0) {
+            print_r($this->rechercher->errorInfo());
+        }
+        return $this->rechercher->fetchAll();
+    }
+
+    public function updatevalide($numunique, $email) {
+        $r = true;
+        $this->updatevalide->execute(array(':numunique' => $numunique, ':email' => $email));
+        if ($this->updatevalide->errorCode() != 0) {
+            print_r($this->updatevalide->errorInfo());
+            $r = false;
+        }
+        return $r;
+    }
+
+    public function updatevalidecompte($datevalide, $email, $valide) {
+        $r = true;
+        $this->updatevalidecompte->execute(array(':datevalide' => $datevalide, ':email' => $email, ':valide' => $valide));
+        if ($this->updatevalidecompte->errorCode() != 0) {
+            print_r($this->updatevalidecompte->errorInfo());
             $r = false;
         }
         return $r;

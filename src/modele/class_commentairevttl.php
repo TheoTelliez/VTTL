@@ -10,16 +10,29 @@ class Commentairevttl {
     private $selectLeDernier2;
     private $selectLeDernier3;
     private $delete;
+    private $selectLimit;
+    private $selectCount;
+    private $rechercher;
 
     public function __construct($db) {
         $this->db = $db;    //je parle à db dans le private et je lui donne la valeur qui est dans le __construct
-        $this->insert = $db->prepare("insert into commentairevttl(titre, message, note, date, idUtilisateurvttl) values (:titre, :message, :note, :date, :idUtilisateurvttl)");
-        $this->select = $db->prepare("select u.prenom as prenom, nom, email, titre, id, message, note, date from commentairevttl c, utilisateurvttl u where c.idUtilisateurvttl = u.email order by date desc");
-        $this->selectLeDernier = $db->prepare("select u.prenom as prenom, nom, email, titre, id, message, note, date from commentairevttl c, utilisateurvttl u where c.idUtilisateurvttl = u.email order by date desc limit 0,1");
-        $this->selectLeDernier1 = $db->prepare("select u.prenom as prenom, nom, email, titre, id, message, note, date from commentairevttl c, utilisateurvttl u where c.idUtilisateurvttl = u.email order by date desc limit 1,1");
-        $this->selectLeDernier2 = $db->prepare("select u.prenom as prenom, nom, email, titre, id, message, note, date from commentairevttl c, utilisateurvttl u where c.idUtilisateurvttl = u.email order by date desc limit 2,1");
-        $this->selectLeDernier3 = $db->prepare("select u.prenom as prenom, nom, email, titre, id, message, note, date from commentairevttl c, utilisateurvttl u where c.idUtilisateurvttl = u.email order by date desc limit 3,1");
+        $this->insert = $db->prepare("insert into commentairevttl(titre, message, note, date, idUtilisateurvttl) values "
+                . "(:titre, :message, :note, :date, :idUtilisateurvttl)");
+        $this->select = $db->prepare("select u.prenom as prenom, nom, email, titre, id, message, note, date from commentairevttl c, "
+                . "utilisateurvttl u where c.idUtilisateurvttl = u.email order by date desc");
+        $this->selectLeDernier = $db->prepare("select u.prenom as prenom, nom, email, titre, id, message, note, date from commentairevttl c,"
+                . " utilisateurvttl u where c.idUtilisateurvttl = u.email order by date desc limit 0,1");
+        $this->selectLeDernier1 = $db->prepare("select u.prenom as prenom, nom, email, titre, id, message, note, date from commentairevttl c,"
+                . " utilisateurvttl u where c.idUtilisateurvttl = u.email order by date desc limit 1,1");
+        $this->selectLeDernier2 = $db->prepare("select u.prenom as prenom, nom, email, titre, id, message, note, date from commentairevttl c,"
+                . " utilisateurvttl u where c.idUtilisateurvttl = u.email order by date desc limit 2,1");
+        $this->selectLeDernier3 = $db->prepare("select u.prenom as prenom, nom, email, titre, id, message, note, date from commentairevttl c,"
+                . " utilisateurvttl u where c.idUtilisateurvttl = u.email order by date desc limit 3,1");
         $this->delete = $db->prepare("delete from commentairevttl where id=:id");
+        $this->selectLimit = $db->prepare("select u.prenom as prenom, nom, email, titre, id, message, note, date from commentairevttl c, "
+                . "utilisateurvttl u where c.idUtilisateurvttl = u.email order by date desc limit :inf,:limite");
+        $this->selectCount = $db->prepare("select count(*) as nb from commentairevttl");
+        $this->rechercher = $db->prepare("select u.prenom as prenom, nom, email, titre, id, message, note, date from commentairevttl c, utilisateurvttl u where c.titre like :recherche and c.idUtilisateurvttl = u.email order by date desc");
     }
 
     public function insert($inputVTTCommentaireTitre, $inputVTTCommentaireMessage, $inputVTTCommentaireNote, $inputVTTCommentaireDate, $inputVTTCommentaireidUtilisateur) {
@@ -80,6 +93,32 @@ class Commentairevttl {
             $r = false;
         }
         return $r;
+    }
+
+    public function selectLimit($inf, $limite) {
+        $this->selectLimit->bindParam(':inf', $inf, PDO::PARAM_INT);
+        $this->selectLimit->bindParam(':limite', $limite, PDO::PARAM_INT);
+        $this->selectLimit->execute();
+        if ($this->selectLimit->errorCode() != 0) {
+            print_r($this->selectLimit->errorInfo());
+        }
+        return $this->selectLimit->fetchAll();
+    }
+
+    public function selectCount() {
+        $this->selectCount->execute();
+        if ($this->selectCount->errorCode() != 0) {
+            print_r($this->selectCount->errorInfo());
+        }
+        return $this->selectCount->fetch();
+    }
+
+    public function rechercher($recherche) {
+        $listerechercheconnexion = $this->rechercher->execute(array(':recherche' => '%' . $recherche . '%'));
+        if ($this->rechercher->errorCode() != 0) {
+            print_r($this->rechercher->errorInfo());
+        }
+        return $this->rechercher->fetchAll();
     }
 
 }

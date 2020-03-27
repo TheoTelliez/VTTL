@@ -1,0 +1,61 @@
+{% extends "base.html.twig" %}
+{% block style %}<link href="css/main.css" rel="stylesheet"> {% endblock %}
+{% block title %} {{ parent() }} Logs Utilisateurs {% endblock %}
+
+{% block contenu %}
+
+    <div style="text-align: center">
+        <h1 class="h1 mb-3 font-weight-normal"> </h1>
+        <h2>Connexions</h2>
+        <h3>Connexions des utilisateurs sur le site :</h3>
+        <br/>
+
+        <div class="panel panel-default">
+            <!-- Table -->
+            <div class="table-responsive">
+
+                <table class="table table-hover table-striped">
+                    <tr><th style="text-align: center">Email :</th><th style="text-align: center">Date de connexion :</th></tr>
+                            {% for c in liste %}
+                        <tr><td style="text-align: center">{{c.emailco}}</td><td style="text-align: center">{{c.dateco|date("d/m/Y")}}</td></tr>
+                            {% endfor %}
+                </table>
+
+
+                {% set nb = form.nbpages %}
+
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        <li>
+                            <a href="index.php?page=logsadmin&nopage={{ 0 }}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        {% for i in 1..nb %}
+                            <li><a href="index.php?page=logsadmin&nopage={{ i-1 }}">{{ i }}</a></li>
+                            {% endfor %}
+                        <li>
+                            <a href="index.php?page=logsadmin&nopage={{ nb-1 }}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <form style ="text-align: center" class="form-signin" action="index.php?page=logsadmin" method="post"
+                      enctype="application/x-www-form-urlencoded">
+
+                    <button class="button special" type="submit" name="btToutVider">Vider la table connexions</button>
+                    <br/><br/>
+
+
+
+                </form>
+            </div>
+
+        </div>
+
+
+    </div>
+
+{% endblock %}  

@@ -1,0 +1,43 @@
+<page backtop="25mm" backbottom="35mm" backleft="5mm" backright="5mm" footer="page; date">
+    <page_footer>
+        <h1 class="h1"> <img src="images/entetevttlpdf.jpg" /></h1>
+    </page_footer>
+    <page_header>
+        <h1 class="h1"> <img src="images/entetevttlpdf.jpg" /></h1>
+    </page_header>
+
+    <table style="width: 100%; margin-top: 10px;">
+        <tr>
+            <td style="text-align: center;width:25%;"><hr style="height: .3mm; background: #000; "></td>
+            <td style="text-align: center;width:50%; padding-top:-5px;">
+                <h2>Informations sur le cours</h2>
+            </td>
+            <td style="text-align: center;width:25%;"><hr style="height: .3mm; background: #000; ">     </td>
+        </tr>
+    </table>
+
+    <h4><span  style="color: #F64747">> Titre du cours :</span> {{form.cours.titre}}</h4>
+    <h4><span  style="color: #F64747">> Difficulté du cours :</span> {{form.cours.libelledifficulte}}</h4>
+    <h4><span  style="color: #F64747">> Auteur du cours :</span> {{form.cours.prenom}} {{form.cours.nom}}</h4>
+    <h4><span  style="color: #F64747">> Date d'ajout du cours :</span> {{form.cours.dateajout|date("d/m/Y")}} à {{form.cours.dateajout|date("H:i:s")}}</h4>
+    <h4><span  style="color: #F64747">> Date de dernière modification du cours :</span> {{form.cours.datedernieremodif|date("d/m/Y")}} à {{form.cours.datedernieremodif|date("H:i:s")}}</h4>
+
+    <table style="width: 100%; margin-top: 10px;">
+        <tr>
+            <td style="text-align: center;width:33%;"><hr style="height: .3mm; background: #000; "></td>
+            <td style="text-align: center;width:33%; padding-top:-5px;">
+                <h2>Cours</h2>
+            </td>
+            <td style="text-align: center;width:33%;"><hr style="height: .3mm; background: #000; ">     </td>
+        </tr>
+    </table>
+
+    {% for sousti in form.section %}
+
+        <h3><span style="color: #F64747">• {{ sousti.soustitre }}</span></h3>
+        <h4>{{ sousti.contenu }}</h4>
+
+    {% endfor %}
+
+</page>
+

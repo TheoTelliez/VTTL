@@ -1,0 +1,87 @@
+{% extends "base.html.twig" %}
+{% block style %}<link href="css/main.css" rel="stylesheet"> {% endblock %}
+{% block title %} {{ parent() }} Panel d'Administration {% endblock %}  
+
+{% block contenu %}
+
+    <h1 class="h1 mb-3 font-weight-normal"> </h1>
+
+    <center>
+
+        <h2>Panel d'Administration</h2>
+        <h3>Administrez et gérez VTT Learning :</h3>
+
+        <h1 class="h1 mb-3 font-weight-normal"> </h1> 
+    </center>
+
+
+    <div id="main" class="container-fluid">
+        <div class="row">
+
+            <!-- Cours & difficultés -->
+
+            <div style="text-align: center" class="col-lg-6 col-sm-12">
+                <h3 class="icon fa-biking" style="color: #F64747"> Cours & difficultés :</h3>
+
+                <ul>
+                    <a class="button alt icon fa-eye" href="index.php?page=cours" style="color:#FFFFFF;">Voir les cours</a>
+                    <a class="button alt icon fa-upload" href="index.php?page=ajoutcours" style="color:#FFFFFF;">Ajouter un cours</a>
+                    <br/><br/>
+                    <a class="button alt icon fa-list-ol" href="index.php?page=difficulte" style="color:#FFFFFF;">Gestion des difficultés</a>
+                </ul>
+
+            </div>
+
+
+            <!-- Utilisateurs -->
+            <div style="text-align: center" class="col-lg-6 col-sm-12">
+                <h3 class="icon fa-users" style="color: #F64747"> Utilisateurs :</h3>
+
+                <ul>
+                    <center>
+                        <a class="button alt icon fa-users" href="index.php?page=utilisateuradmin" style="color:#FFFFFF;">Gestion des utilisateurs</a>
+                        <a class="button alt icon fa-chart-bar" href="index.php?page=stats&annee={{ "now"|date("Y") }}&mois={{ "now"|date("m") }}&jour={{ "now"|date("j") }}" style="color:#FFFFFF;">Statistiques</a>
+                        <br/><br/>
+                        <a class="button alt icon fa-list" href="index.php?page=logsadmin" style="color:#FFFFFF;">Connexions des utilisateurs</a>
+                        <a class="button alt icon fa-chart-pie" href="http://serveur1.arras-sio.com/symfony4-4059/VTTL/src/controleur/statistiques_vttl.php" style="color:#FFFFFF;">Statistiques</a>
+                    </center>
+                </ul>
+
+            </div>
+
+
+            <!-- Messagerie -->
+            <div style="text-align: center" class="col-lg-6 col-sm-12">
+                <h3 class="icon fa-comments" style="color: #F64747"> Messagerie :</h3>
+
+                <ul>
+                    <a class="button alt icon fa-hands-helping" href="index.php?page=contactadmin" style="color:#FFFFFF;">Liste des messages de contact</a>
+                    <br/><br/>
+                    <a class="button alt icon fa-comments" href="index.php?page=commentaireadmin" style="color:#FFFFFF;">Liste des commentaires</a>
+                </ul>
+
+            </div>
+
+
+            <!-- Sauvegardes -->
+            <div style="text-align: center" class="col-lg-6 col-sm-12">
+                <br/><br/>
+                <h3 class="icon fa-database" style="color: #F64747"> Sauvegardes :</h3>
+
+                <ul>
+                    <a class="button alt icon fa-database" href="http://serveur1.arras-sio.com/symfony4-4059/VTTL/sauvegardes/sauvegardebd.php" style="color:#FFFFFF;">Sauvegarde de la BD (bêta)</a>
+                </ul>
+
+
+            </div>
+
+
+
+        </div>
+        <br/><br/><br/>
+    </div>
+
+
+
+
+{% endblock %}

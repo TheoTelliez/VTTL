@@ -1,0 +1,86 @@
+{% extends "base.html.twig" %}
+{% block style %}<link href="css/main" rel="stylesheet"> {% endblock %}
+{% block title %} {{ parent() }} Difficulté{% endblock %}  
+
+{% block contenu %} 
+
+    {% if form.valide is defined %}
+        {% if form.valide == true %}
+            <center>
+                <h1 class="h3 mb-3 font-weight-normal">{{ form.message }}</h1>
+            </center>
+        {% else %}
+            <center>
+                <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1>
+            </center>
+        {% endif %}
+    {% endif %}
+
+    <center>
+        <h1 class="h1 mb-3 font-weight-normal"> </h1>
+        <h2>Difficultés</h2>
+        <h3>Liste des difficultés de cours :</h3>
+        <p>Grâce à ce formulaire, ajoutez une difficulté sur le site pour créer <a href="index.php?page=cours"> un cours</a> avec une nouvelle difficulté de référencée.</p>
+    </center>
+    <div class="panel panel-default">
+
+        <!-- Table -->
+        <div class="table-responsive">
+            <div style="overflow-x:auto;">
+                <div style="text-align: center">
+
+
+                    <table class="table table-hover table-striped">
+                        <tr><th style="text-align: center">Difficulté</th><th></th><th style="text-align: center">Édition</th><th style="text-align: center">Supression</th></tr>
+                                {% for c in liste %}
+                            <tr><td>{{c.libelle}}</td><td></td
+                                ><td> <div class="btn-group btn-group-lg"><a href="http://serveur1.arras-sio.com/symfony4-4059/VTTL/web/index.php?page=modifdifficulte&difficulte={{c.id}}"><span class="icon fa-pencil"
+                                                                                                                                                                                                  aria-hidden="true"></span></a></div></td><td><div class="btn-group btn-group-lg"><a
+                                            href="http://serveur1.arras-sio.com/symfony4-4059/VTTL/web/index.php?page=difficulte&id={{c.id}}"><span class="icon fa-trash" ariahidden="true"></span></a></div></td></tr>
+                                        {% endfor %}
+                    </table>
+
+
+
+                    <form action="index.php?page=difficulte" method="post" enctype="application/x-www-form-urlencoded">
+                        {% set nb = form.nbpages %}
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination">
+                                <li>
+                                    <a href="index.php?page=difficulte&nopage={{ 0 }}" aria-label="Précédent">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                {% for i in 1..nb %}
+                                    <li><a href="index.php?page=difficulte&nopage={{ i-1 }}">{{ i }}</a></li>
+                                    {% endfor %}
+                                <li>
+                                    <a href="index.php?page=difficulte&nopage={{ nb-1 }}" aria-label="Suivant">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+
+
+
+
+                        <h1 class="h1 mb-3 font-weight-normal">Ajoutez une difficulté</h1>
+
+                        <h1 class="h1 mb-3 font-weight-normal"> </h1>
+
+                        <label for="inputDifficulte" class="sr-only">Nom:</label>
+                        <input type="text" id="inputDifficulte" name="inputDifficulte" class="form-control"
+                               placeholder="Saisir une difficulté" required autofocus>
+
+                        <button class="button special fit" type="submit" name="btDifficulte" id="btDifficulte">Ajouter</button>
+                        <br/><br/><br/><br/><br/><br/>
+                        <input type="hidden" name="id" value="{{ c.id }}"/>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div> 
+
+{% endblock %} 

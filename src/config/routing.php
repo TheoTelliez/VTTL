@@ -3,6 +3,7 @@
 function getPage($db) {
 // Inscrire vos contrôleurs ici
     $lesPages['accueil'] = "actionAccueil;0";
+    $lesPages['maintenance'] = "actionMaintenance;0";
     $lesPages['apropos'] = "actionApropos;0";
     $lesPages['contact'] = "actionContactvttl;0";
     $lesPages['mentions'] = "actionMentions;0";
@@ -20,7 +21,24 @@ function getPage($db) {
     $lesPages['mdpoublie'] = "actionMdpOublie;0";
     $lesPages['checkmail'] = "actionCheckMail;0";
     $lesPages['modifmotdepasse'] = "actionModifMotDePasse;0";
-    $lesPages['ajoutcours'] = "actionAjoutCours;1";    
+    $lesPages['ajoutcours'] = "actionAjoutCours;1";
+    $lesPages['logsadmin'] = "actionLogsAdmin;1";
+    $lesPages['logsvttl'] = "actionLogsVttl;0";
+    $lesPages['stats'] = "actionStats;1";
+    $lesPages['cours'] = "actionCours;0";
+    $lesPages['listecourspdf'] = "actionListeCoursPdf;0";
+    $lesPages['difficulte'] = "actionDifficulte;1";
+    $lesPages['modifdifficulte'] = "actionModifDifficulte;1";
+    $lesPages['paneladmin'] = "actionPanelAdmin;1";
+    $lesPages['voircours'] = "actionVoirCours;0";
+    $lesPages['modifcours'] = "actionModifCours;1";
+    $lesPages['telechargercours'] = "actionTelechargerCoursPdf;0";
+    $lesPages['stats'] = "actionStats;1";
+    $lesPages['recherches'] = "actionRecherches;0";
+    $lesPages['resultatrecherches'] = "actionResultatRecherches;0";
+    $lesPages['checkcompte'] = "actionCheckCompte;0";
+    $lesPages['validecompte'] = "actionValideCompte;0";
+    $lesPages['sommaire'] = "actionSommaire;0";
 
     if ($db != null) {
         if (isset($_GET['page'])) {

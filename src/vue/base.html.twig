@@ -24,16 +24,21 @@
             <nav id="menu">
                 <ul class="links">
                     <li><a href="index.php">Accueil</a></li>
+                    <li><a href="index.php?page=cours">Cours</a></li>
                         {%if session.login is defined %}
                             {%if session.role == 1 %}
                             <li>
                                 <a class="dropdown-toggle" href="" id="dropdown01" data-toggle="dropdown" ariahaspopup="
                                    true" aria-expanded="false">Administration</a>
                                 <ul>
-                                    <li><a class="dropdown-item" href="index.php?page=ajoutcours" style="color:#FFFFFF;">Ajout d'un cours</a></li> <!-- Si je ne mets pas le style color, étant donné que le lien n’est pas défaut dans le css en rouge il ne se voit pas dans le menu donc je le redéfini en blanc avec le #FFFFFF  -->
-                                    <li><a class="dropdown-item" href="index.php?page=contactadmin" style="color:#FFFFFF;">Liste des messages de contact</a></li>
+                                    <li><a class="dropdown-item" href="index.php?page=paneladmin" style="color:#FFFFFF;">Panel d'administration</a></li>
+                                    <li><a class="dropdown-item" href="index.php?page=ajoutcours" style="color:#FFFFFF;">Ajouter un cours</a></li> <!-- Si je ne mets pas le style color, étant donné que le lien n’est pas défaut dans le css en rouge il ne se voit pas dans le menu donc je le redéfini en blanc avec le #FFFFFF  -->
+                                    <li><a class="dropdown-item" href="index.php?page=difficulte" style="color:#FFFFFF;">Gestion des difficultés</a></li>
+                                    <li><a class="dropdown-item" href="index.php?page=contactadmin" style="color:#FFFFFF;">Messages de contact</a></li>
                                     <li><a class="dropdown-item" href="index.php?page=commentaireadmin" style="color:#FFFFFF;">Liste des commentaires</a></li>
-                                    <li><a class="dropdown-item" href="index.php?page=utilisateuradmin" style="color:#FFFFFF;">Liste des utilisateurs</a></li>
+                                    <li><a class="dropdown-item" href="index.php?page=utilisateuradmin" style="color:#FFFFFF;">Gestion des utilisateurs</a></li>
+                                    <li><a class="dropdown-item" href="index.php?page=logsadmin" style="color:#FFFFFF;">Connexions des utilisateurs</a></li>
+                                    <li><a class="dropdown-item" href="http://serveur1.arras-sio.com/symfony4-4059/VTTL/src/controleur/statistiques_vttl.php" style="color:#FFFFFF;">Graphique de connexions</a></li>
                                 </ul>
                             </li>
                         {% endif %}
@@ -42,6 +47,7 @@
                     <li><a href="index.php?page=mentions">Mentions légales</a></li>
                     <li><a href="index.php?page=contact">Contact</a></li>
                     <li><a href="index.php?page=commentaire">Commentaires</a></li>
+                    <li><a href="index.php?page=recherches">Recherches</a></li>
                         {%if session.login is defined %}
                         <li><a href="index.php?page=profil&email={{session.login}}">Mon compte</a></li>
                         <li><a href="index.php?page=deconnexion">Se déconnecter</a></li>
@@ -53,21 +59,24 @@
             </nav>
             {% block contenu %}
             {% endblock %}
-            <!-- Footer -->
-            <footer id="footer">
-                <div class="inner">
-                    <ul class="icons">
-                        <li><a href="https://twitter.com/LearningVtt" target="_blank" class="icon round fa-twitter"><span class="label">Twitter</span></a></li>
-                        <li><a href="https://www.facebook.com/vtt.learning.1" target="_blank" class="icon round fa-facebook"><span class="label">Facebook</span></a></li>
-                        <li><a href="https://www.instagram.com/vttlearning/" target="_blank" class="icon round fa-instagram"><span class="label">Instagram</span></a></li>
-                    </ul>
 
-                    <div class="copyright">
-                        &copy; VTT Learning. Modèle: <a href="https://templated.co">TEMPLATED</a>. Images: <a href="https://unsplash.com/s/photos/mountain-bike">Unsplash</a>. Createur: <a href="#">Théo TELLIEZ</a>.
+            {% block footer %}
+                <!-- Footer -->
+                <footer id="footer">
+                    <div class="inner">
+                        <ul class="icons">
+                            <li><a href="https://twitter.com/LearningVtt" target="_blank" class="icon round fa-twitter"><span class="label">Twitter</span></a></li>
+                            <li><a href="https://www.facebook.com/vtt.learning.1" target="_blank" class="icon round fa-facebook"><span class="label">Facebook</span></a></li>
+                            <li><a href="https://www.instagram.com/vttlearning/" target="_blank" class="icon round fa-instagram"><span class="label">Instagram</span></a></li>
+                        </ul>
+
+                        <div class="copyright">
+                            &copy; VTT Learning. Modèle: <a target='_blank' href="https://templated.co">TEMPLATED</a>. Images: <a target='_blank' href="https://unsplash.com/s/photos/mountain-bike">Unsplash</a>. Créateur: <a href="#">Théo TELLIEZ</a>.
+                        </div>
+
                     </div>
-
-                </div>
-            </footer>
+                </footer>
+            {% endblock %}
         {% endblock %}
 
 
@@ -85,6 +94,7 @@
         <script src="js/skel.min.js"></script>
         <script src="js/util.js"></script>
         <script src="js/main.js"></script>
+        <script src="js/script.js"></script>
 
     </body>
 </html>

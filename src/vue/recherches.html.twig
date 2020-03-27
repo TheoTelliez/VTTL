@@ -1,0 +1,170 @@
+{% extends "base.html.twig" %}
+{% block style %}<link href="css/main.css" rel="stylesheet"> {% endblock %}
+{% block title %} {{ parent() }} Panel d'Administration {% endblock %}  
+
+{% block contenu %}
+
+    <h1 class="h1 mb-3 font-weight-normal"> </h1>
+
+    <center>
+
+        <h2>Panel de recherches</h2>
+        <h3>Recherchez ce dont vous avez besoin sur VTT Learning :</h3>
+
+        <h1 class="h1 mb-3 font-weight-normal"> </h1> 
+    </center>
+
+
+    <div id="main" class="container-fluid">
+        <div class="row">
+
+            <!-- Cours & difficultés -->
+
+            <div style="text-align: center" class="col-lg-6 col-sm-12">
+                <h3 class="icon fa-biking" style="color: #F64747"> Cours & difficultés :</h3>
+
+                <form method="post" action="index.php?page=resultatrecherches">
+                    <div class="row uniform"> 
+                        <div class="col-lg-9 col-sm-12">
+                            <input type="text" name="inputrecherchecours" id="inputrecherchecours" placeholder="Rechercher un cours (par titre)" />
+                        </div>
+                        <div class="col-lg-3 col-sm-12">
+                            <input name="btrecherchecours" id="btrecherchecours" type="submit" value="Rechercher"  />
+
+                        </div>
+                    </div>
+                </form>
+                <form method="post" action="index.php?page=resultatrecherches">
+                    {%if session.role == 1 %}
+                        <div class="row uniform">
+                            <div class="col-lg-9 col-sm-12">
+                                <input type="text" name="inputrecherchedifficulte" id="inputrecherchedifficulte" placeholder="Rechercher une difficulte (par nom)" />
+                            </div>
+                            <div class="col-lg-3 col-sm-12">
+                                <input name="btrecherchedifficulte" id="btrecherchedifficulte" type="submit" value="Rechercher"  />
+                                <br/><br/>
+                            </div>
+                        </div>
+                    {% endif %}
+                </form>
+
+
+            </div>
+
+
+            <!-- Utilisateurs -->
+            <div style="text-align: center" class="col-lg-6 col-sm-12">
+
+                <h3 class="icon fa-users" style="color: #F64747"> Utilisateurs :</h3>
+
+                <form method="post" action="index.php?page=resultatrecherches">
+                    <div class="row uniform">
+                        <div class="col-lg-9 col-sm-12">
+                            <input type="text" name="inputrechercheutilisateur" id="inputrechercheutilisateur" value="" placeholder="Rechercher un utilisateur (par email)" />
+                        </div>
+                        <div class="col-lg-3 col-sm-12">
+                            <input name="btrechercheutilisateur" id="btrechercheutilisateur" type="submit" value="Rechercher"  />
+
+                        </div>
+                    </div>
+                </form>
+                <form name="recherches" method="post" action="index.php?page=resultatrecherches">
+                    {%if session.role == 1 %}
+                        <div class="row uniform">
+                            <div class="col-lg-9 col-sm-12">
+                                <input type="text" name="inputrechercheconnexion" id="inputrechercheconnexion" value="" placeholder="Rechercher une connexion (par date)"  onClick=" window.open('popalenvers.php?frm=recherches&ch=inputrechercheconnexion', 'calendrier', 'width=350,height=160,scrollbars=0').focus();"/>
+                            </div>
+                            <div class="col-lg-3 col-sm-12">
+                                <input name="btrechercheconnexion" id="btrechercheconnexion" type="submit" value="Rechercher"  />
+                                <br/><br/>
+                            </div>
+                        </div>
+                    {% endif %}
+                </form>
+
+            </div>
+        </div>
+        <br/>
+        {%if session.role == 1 %}
+            <div class="row">
+
+
+                <!-- Messagerie -->
+                <div style="text-align: center" class="col-lg-6 col-sm-12">
+                    <h3 class="icon fa-comments" style="color: #F64747"> Messagerie :</h3>
+
+                    <form method="post" action="index.php?page=resultatrecherches">
+                        <div class="row uniform">
+                            <div class="col-lg-9 col-sm-12">
+                                <input type="text" name="inputrecherchecontact" id="inputrecherchecontact" value="" placeholder="Rechercher un message de contact" />
+                            </div>
+                            <div class="col-lg-3 col-sm-12">
+                                <input name="btrecherchecontact" id="btrecherchecontact" type="submit" value="Rechercher"  />
+
+                            </div>
+                        </div>
+                    </form>
+                    <form method="post" action="index.php?page=resultatrecherches">
+                        <div class="row uniform">
+                            <div class="col-lg-9 col-sm-12">
+                                <input type="text" name="inputrecherchecommentaire" id="inputrecherchecommentaire" value="" placeholder="Rechercher un commentaire" />
+                            </div>
+                            <div class="col-lg-3 col-sm-12">
+                                <input name="btrecherchecommentaire" id="btrecherchecommentaire" type="submit" value="Rechercher"  />
+                                <br/>
+                            </div>
+                        </div>
+                    </form>
+
+
+
+                </div>
+
+
+                <div style="text-align: center" class="col-lg-6 col-sm-12">
+                    <h3 style="color: #F64747"></h3>
+
+                    <form method="post" action="index.php?page=resultatrecherches">
+                        <br/>
+                        <img height="20%" src="images/recherches.PNG" alt="" />
+
+
+                    </form>
+
+                </div>
+
+
+
+            </div>
+        {% endif %}
+        {%if session.role != 1 %}
+            <div class="row">
+
+
+                <div style="text-align: center" class="col-lg-12 col-sm-12">
+                    <h3 style="color: #F64747"></h3>
+
+                    <form method="post" action="index.php?page=resultatrecherches">
+                        <br/>
+                        <img height="20%" src="images/recherches.PNG" alt="" />
+
+
+                    </form>
+
+                </div>
+
+
+
+            </div>
+        {% endif %}
+        <br/><br/><br/>
+    </div>
+
+
+
+
+
+
+
+
+{% endblock %}

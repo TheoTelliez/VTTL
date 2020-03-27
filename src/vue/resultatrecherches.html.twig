@@ -1,0 +1,199 @@
+{% extends "base.html.twig" %}
+{% block style %}<link href="css/main.css" rel="stylesheet"> {% endblock %}
+{% block title %} {{ parent() }} Résultat de la recherche {% endblock %}  
+
+{% block contenu %}
+
+
+
+    <!-- Cours -->
+
+    {% if listerecherchecours is not empty %}
+
+
+        <h1 class="h1 mb-3 font-weight-normal"> </h1>
+
+        <center>
+
+            <h2>Résultats de votre recherche sur les cours</h2>
+            <h3>Trouvez votre bonheur ci dessous :</h3>
+
+            <h1 class="h1 mb-3 font-weight-normal"> </h1> 
+        </center>
+
+
+        <div class="panel panel-default">
+            <div class="table-responsive">
+                <div style="overflow-x:auto;">
+                    <table class="table table-hover table-striped">
+                        <tr><th>Titre du cours</th><th>Difficulté</th><th>Date d'ajout</th><th>Date de la dernière modification</th><th>Auteur</th><!--<th>Photo</th>--><th>Outils</th>{%if session.role == 1 %}<th>Modifications</th>{% endif %}</tr>
+                                {% for c in listerecherchecours %}
+                            <tr><td>{{c.titre}}</td><td>{{c.libelledifficulte}}</td><td>{{c.dateajout|date("d/m/Y H:i:s")}}</td><td>{{c.datedernieremodif|date("d/m/Y H:i:s")}}</td><td>{{c.prenom}} {{c.nom}}</td><!--<td>                                                                                                                         
+                                {% if c.photo is not empty %}
+                                    <img src="images/{{c.photo}}" alt= "image du cours " style="width: 100px; vertical-align: middle;"/>
+                                {% endif %}
+                                                                                                                                                 </td>--><td><a href="index.php?page=voircours&idcours={{c.idcours}}" class="icon fa-eye"><span class="label">Voir</span></a><a></a>     <a href="index.php?page=telechargercours&idcours={{c.idcours}}" class="icon fa-download"  target="_blank"><span class="label">Télécharger</span></a></td>{%if session.role == 1 %}<td>     <a href="index.php?page=cours&supp={{c.idcours}}" class="icon fa-trash"><span class="label">Supprimer</span></a>     <a href="index.php?page=modifcours&idcours={{c.idcours}}" class="icon fa-pencil"><span class="label">Modifier</span></a></td>{% endif %}</tr>
+                            {% endfor %}
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Difficulté -->
+
+    {% elseif listerecherchedifficulte is not empty %}
+
+
+        <h1 class="h1 mb-3 font-weight-normal"> </h1>
+
+        <center>
+
+            <h2>Résultats de votre recherche sur les difficulés</h2>
+            <h3>Trouvez votre bonheur ci dessous :</h3>
+            <h1 class="h1 mb-3 font-weight-normal"> </h1> 
+        </center>
+
+        <div class="panel panel-default">
+
+            <!-- Table -->
+            <div class="table-responsive">
+                <div style="overflow-x:auto;">
+                    <div style="text-align: center">
+
+
+                        <table class="table table-hover table-striped">
+                            <tr><th style="text-align: center">Difficulté</th><th></th><th style="text-align: center">Édition</th><th style="text-align: center">Supression</th></tr>
+                                    {% for c in listerecherchedifficulte %}
+                                <tr><td>{{c.libelle}}</td><td></td
+                                    ><td> <div class="btn-group btn-group-lg"><a href="http://serveur1.arras-sio.com/symfony4-4059/VTTL/web/index.php?page=modifdifficulte&difficulte={{c.id}}"><span class="icon fa-pencil"
+                                                                                                                                                                                                      aria-hidden="true"></span></a></div></td><td><div class="btn-group btn-group-lg"><a
+                                                href="http://serveur1.arras-sio.com/symfony4-4059/VTTL/web/index.php?page=difficulte&id={{c.id}}"><span class="icon fa-trash" ariahidden="true"></span></a></div></td></tr>
+                                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div> 
+
+    {% elseif listerechercheutilisateur is not empty %}
+
+        <h1 class="h1 mb-3 font-weight-normal"> </h1>
+
+        <center>
+
+            <h2>Résultats de votre recherche sur les utilisateurs</h2>
+            <h3>Trouvez votre bonheur ci dessous :</h3>
+            <h1 class="h1 mb-3 font-weight-normal"> </h1> 
+        </center>
+
+
+        <div class="table-responsive">
+            <div style="overflow-x:auto;">
+                <table class="table table-hover table-striped">
+                    <tr><th>Email</th><th>Nom</th><th>Prénom</th><th>Rôle</th>{%if session.role == 1 %}<th>Date d'inscription</th><th>Dernière connexion</th><th>Édition</th>{% endif %}</tr>
+                            {% for u in listerechercheutilisateur %}
+                        <tr><td>{{u.email}}</td><td>{{u.nom}}</td><td>{{u.prenom}}</td><td>{{u.libellerole}}</td>{%if session.role == 1 %}<td>{{u.dateinscription|date("d/m/Y")}}</td><td>{{u.datedernier|date("d/m/Y")}}</td><td><a href="index.php?page=utilisateuradmin&email={{u.email}}" class="icon fa-trash"><span class="label">Supprimer</span></a><a></a>     <a href="index.php?page=modifprofil&email={{u.email}}" class="icon fa-pencil"><span class="label">Modifier</span></a></td>{% endif %}</tr>
+                    {% endfor %}
+                </table>
+
+            </div>
+        </div>
+
+
+    {% elseif listerechercheconnexion is not empty %}
+
+        <h1 class="h1 mb-3 font-weight-normal"> </h1>
+
+        <center>
+
+            <h2>Résultats de votre recherche sur les connexions</h2>
+            <h3>Trouvez votre bonheur ci dessous :</h3>
+            <h1 class="h1 mb-3 font-weight-normal"> </h1> 
+        </center>
+
+        <div class="panel panel-default">
+            <!-- Table -->
+            <div class="table-responsive">
+
+                <table class="table table-hover table-striped">
+                    <tr><th style="text-align: center">Email :</th><th style="text-align: center">Heure de connexion :</th></tr>
+                            {% for c in listerechercheconnexion %}
+                        <tr><td style="text-align: center">{{c.emailco}}</td><td style="text-align: center">{{c.dateco|date("H:i:s")}}</td></tr>
+                            {% endfor %}
+                </table>
+            </div>
+            <br/>
+
+        </div>
+
+
+    {% elseif listerecherchecontact is not empty %}
+
+        <h1 class="h1 mb-3 font-weight-normal"> </h1>
+
+        <center>
+
+            <h2>Résultats de votre recherche sur les messages de contact</h2>
+            <h3>Trouvez votre bonheur ci dessous :</h3>
+            <h1 class="h1 mb-3 font-weight-normal"> </h1> 
+        </center>
+
+        <div class="table-responsive">
+            <div style="overflow-x:auto;">
+                <table class="table table-hover table-striped">
+                    <tr><th>Date</th><th>Email</th><th>Nom</th><th>Prénom</th><th>Message</th><th>Édition</th></tr>
+                            {% for c in listerecherchecontact %}
+                        <tr><td>{{c.date|date("d/m/Y")}}</td><td>{{c.email}}</td><td>{{c.nom}}</td><td>{{c.prenom}}</td><td>{{c.message}}</td><td><a href="index.php?page=contactadmin&id={{c.id}}" class="icon fa-trash"><span class="label">Supprimer</span></a><a></a>     <a href="mailto:{{c.email}}" class="icon fa-reply"><span class="label">Répondre</span></a></td></tr>
+                    {% endfor %}
+                </table>   
+
+            </div>
+        </div>
+
+    {% elseif listerecherchecommentaire is not empty %}
+
+        <h1 class="h1 mb-3 font-weight-normal"> </h1>
+
+        <center>
+
+            <h2>Résultats de votre recherche sur les commentaires</h2>
+            <h3>Trouvez votre bonheur ci dessous :</h3>
+            <h1 class="h1 mb-3 font-weight-normal"> </h1> 
+        </center>
+
+
+        <div class="table-responsive">
+            <div style="overflow-x:auto;">
+                <table class="table table-hover table-striped">
+                    <tr><th>Date</th><th>Email</th><th>Nom</th><th>Prénom</th><th>Titre</th><th>Commentaire</th><th>Note</th><th>Édition</th></tr>
+                            {% for c in listerecherchecommentaire %}
+                        <tr><td>{{c.date|date("d/m/Y")}}</td><td>{{c.email}}</td><td>{{c.nom}}</td><td>{{c.prenom}}</td><td>{{c.titre}}</td><td>{{c.message}}</td><td>{{c.note}}/5</td><td><a href="index.php?page=commentaireadmin&id={{c.id}}" class="icon fa-trash"><span class="label">Supprimer</span></a><a></a>     <a href="mailto:{{c.email}}?cc=&bcc=&subject=Commentaire sur le site VTT Learning&body=Bonjour {{c.nom}} {{c.prenom}},%0D%0A%0D%0AMerci d'avoir pris le temps de mettre un commentaire sur VTT Learning. %0D%0AVotre avis compte beaucoup pour nous. Aussi, nous espérons avoir répondu à vos attentes.%0D%0A%0D%0AA bientôt sur notre site !%0D%0A%0D%0A " class="icon fa-thumbs-up"><span class="label">Répondre</span></a></td></tr>
+                    {% endfor %}
+                </table>   
+
+            </div>
+        </div>
+
+
+    {% else %}
+
+
+        <h1 class="h1 mb-3 font-weight-normal"> </h1>
+
+        <center>
+
+            <h2>Résultats de votre recherche</h2>
+            <h3>Nous sommes désolés, nous n'avons pas pu trouver votre bonheur :(</h3>
+
+            <br/><br/>
+            <img height="20%" src="images/pasderecherche.png" alt="" />
+
+            <h1 class="h1 mb-3 font-weight-normal"> </h1> 
+        </center>
+    {% endif %}
+
+
+
+{% endblock %}

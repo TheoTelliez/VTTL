@@ -1,0 +1,72 @@
+{% extends "base.html.twig" %}
+{% block style %}<link href="css/main.css" rel="stylesheet"> {% endblock %}
+{% block title %} {{ parent() }} Voir un cours {% endblock %}
+
+{% block contenu %}
+
+    {% if form.cours is defined %} <!-- Mettre is -->
+
+        {% if form.cours != null %} <!-- Mettre != -->
+
+            <div style="text-align: center">
+                <h1 class="h1"> </h1>
+                <h2>Cours</h2>
+                <h3 class="icon fa-book-open"> Voir le cours <span class="icon fa-book-open"></span></h3>
+                <br/> 
+            </div>
+            <form class="form-signin" action="index.php?page=voircours" method="post"
+                  enctype="application/x-www-form-urlencoded">
+                
+                <h4><span class="icon fa-arrow-circle-right" style="color: #F64747"> Titre du cours :</span> {{form.cours.titre}}</h4>
+                <h4><span class="icon fa-arrow-circle-right" style="color: #F64747"> Difficulté du cours :</span> {{form.cours.libelledifficulte}}</h4>
+                <h4><span class="icon fa-arrow-circle-right" style="color: #F64747"> Auteur du cours :</span> {{form.cours.prenom}} {{form.cours.nom}}</h4>
+                <h4><span class="icon fa-arrow-circle-right" style="color: #F64747"> Date d'ajout du cours :</span> {{form.cours.dateajout|date("d/m/Y")}} à {{form.cours.dateajout|date("H:i:s")}}</h4>
+                <h4><span class="icon fa-arrow-circle-right" style="color: #F64747"> Date de dernière modification du cours :</span> {{form.cours.datedernieremodif|date("d/m/Y")}} à {{form.cours.datedernieremodif|date("H:i:s")}}</h4>
+                
+
+
+                <br/><br/>
+
+                {% for sousti in form.section %}
+
+                    <h4><span class="icon fa-caret-right"> {{ sousti.soustitre }}</span></h4><br/>
+                    <p>{{ sousti.contenu }}</p>
+
+                {% endfor %}
+
+
+                <br/><br/>
+            </form>
+                {%if session.role == 1 %}
+                <center>
+                <a href="index.php?page=modifcours&idcours={{form.cours.idcours}}"><span class="button alt icon fa-edit" aria-hidden="true">Modifier ce cours</span></a>
+                <br/><br/>
+                <a href="index.php?page=cours&supp={{form.cours.idcours}}"><span class="button alt icon fa-eraser" aria-hidden="true">Supprimer ce cours</span></a>
+                <br/><br/><br/><br/>
+                </center>
+                {% endif %}
+
+        {% else %}
+            <center>
+                <br/><br/><br/>
+                <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1>
+                <h1 class="h3 mb-3 font-weight-normal"><a style="color: #F64747" href="index.php?page=cours">Retourner sur la liste des cours</a></h1>
+            </center>
+        {% endif %}
+    {% else %}
+        {% if form.valide == true %}
+            <center>
+                <br/><br/><br/>
+                <h1 class="h3 mb-3 font-weight-normal">{{ form.message }} </h1>
+                <h1 class="h3 mb-3 font-weight-normal"><a style="color: #F64747" href="index.php?page=cours">Retourner sur la liste des cours</a></h1>
+            </center>
+        {% else %}
+            <center>
+                <br/><br/><br/>
+                <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1>
+                <h1 class="h3 mb-3 font-weight-normal"><a style="color: #F64747" href="index.php?page=cours">Retourner sur la liste des cours</a></h1>
+            </center>
+        {% endif %}
+
+    {% endif %}
+{% endblock %} {# empty Twig template #}

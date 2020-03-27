@@ -12,7 +12,7 @@
                 <h1 class="h3 mb-3 font-weight-normal">Voici votre email : {{form.inputVTTContactEmail}}</h1>
                 <h1 class="h3 mb-3 font-weight-normal">Voici votre nom : {{form.inputVTTContactNom}}</h1>
                 <h1 class="h3 mb-3 font-weight-normal">Voici votre prénom : {{form.inputVTTContactPrenom}}</h1>
-                <h1 class="h3 mb-3 font-weight-normal">Voici la date de votre demande : {{form.inputVTTContactDate}}</h1>
+                <h1 class="h3 mb-3 font-weight-normal">Voici la date de votre demande : {{form.inputVTTContactDate|date("d/m/Y")}}</h1>
                 <h1 class="h3 mb-3 font-weight-normal">Voici votre message : {{form.inputVTTContactMessage}}</h1>
                 <p> <br /><h1 class="h3 mb-3 font-weight-normal"><a style="color:#F64747;" href="index.php?page=contact">Retourner sur la page de contact</a></h1><br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
         </center>
@@ -25,11 +25,12 @@
         </center>
     {% endif %}
 
-{% else %} 
+{% else %}
 
-    <h1 class="h1 mb-3 font-weight-normal"> </h1>
 
+    
     <center>
+        <h1 class="h1 mb-3 font-weight-normal"> </h1>
         <h2>Contact</h2>
         <h3>Me contacter :</h3>
         <p>Grâce à ce formulaire, envoyez-moi directement <a href="mailto:theo.telliez@epsi.fr"> un email</a> à propos de votre projet.<br /> Notez également que à chaque bas de page, vous avez des liens de redirection vers nos différents réseaux sociaux.<br /> Je vous contacte en retour dès que possible.</p>

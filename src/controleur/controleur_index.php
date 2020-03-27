@@ -17,11 +17,18 @@ function actionMentions($twig) {
     echo $twig->render('mentions.html.twig', array());
 }
 
+function actionMaintenance($twig) {
+    echo $twig->render('maintenance.html.twig', array());
+}
+
+function actionSommaire($twig) {
+    echo $twig->render('sommaire.html.twig', array());
+}
+
 function actionDeconnexion($twig) {
     session_unset();
     session_destroy();
     header("Location:index.php");
 }
-
 
 ?>

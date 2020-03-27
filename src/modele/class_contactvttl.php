@@ -6,12 +6,14 @@ class Contactvttl {
     private $insert;
     private $select;
     private $delete;
+    private $rechercher;
 
     public function __construct($db) {  //c'est le constructeur qui s'exécute quand on fait un new Contact ($contact = new Contact($db);) dans le controleur_contact
         $this->db = $db;    //je parle à db dans le private et je lui donne la valeur qui est dans le __construct
         $this->insert = $db->prepare("insert into contactvttl(nom, prenom, email, date, message) values (:nom, :prenom, :email, :date, :message)");
         $this->select = $db->prepare("select id, nom, prenom, email, date, message from contactvttl order by date"); //pas de desc sinon les plus récent apparait et c'est pas logique parce que les plus anciens messages doivent être traités avant les nouveaux !
         $this->delete = $db->prepare("delete from contactvttl where id=:id");
+        $this->rechercher = $db->prepare("select id, nom, prenom, email, date, message from contactvttl where message like :recherche order by date");
     }
 
     public function insert($inputVTTContactNom, $inputVTTContactPrenom, $inputVTTContactEmail, $inputVTTContactDate, $inputVTTContactMessage) {
@@ -40,6 +42,14 @@ class Contactvttl {
             $r = false;
         }
         return $r;
+    }
+
+    public function rechercher($recherche) {
+        $listerecherchecontact = $this->rechercher->execute(array(':recherche' => '%' . $recherche . '%'));
+        if ($this->rechercher->errorCode() != 0) {
+            print_r($this->rechercher->errorInfo());
+        }
+        return $this->rechercher->fetchAll();
     }
 
 }

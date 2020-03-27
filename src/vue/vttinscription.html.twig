@@ -16,7 +16,7 @@
                 </center>
             {% else %}
                 <center>
-                <h1 class="h3 mb-3 font-weight-normal">Vous êtes un client du site </h1><p> <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
+                <h1 class="h3 mb-3 font-weight-normal">Vous êtes un client du site </h1>
                 
                 </center>
             {% endif %}
@@ -26,7 +26,7 @@
             <h1 class="h3 mb-3 font-weight-normal">Erreur : {{form.message}}</h1>
             <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=inscription">Retourner sur
                     la page d'inscription</a></h1>
-            <p> <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
+            
             </center>
                 {% endif %}
 
@@ -62,14 +62,19 @@
                            placeholder="Confirmation mot de passe" required>
 
                     <select class="form-control" name="role">
-                        <option value="1">Administrateur</option>
-                        <option value="2">Client</option>
-                    </select>
+                    {% for r in form.roles %}
+                        {% if r.id==form.utilisateur.idRole %}
+                            <option value="{{ r.id }}" selected>{{ r.libelle }}</option>
+                        {% else %}
+                            <option value="{{ r.id }}">{{ r.libelle }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
                     
                    
                     <div style ="text-align: left">
-                        <h5>Choisir une photo de profil :       <label for="photo" class="sr-only">Photo :</label>
-                                                            <input type="file" name="photo" id="photo" class="form-control"/> </h5>
+                        <label for="photo" class="sr-only">Photo :</label>
+                                                            <input type="file" name="photo" id="photo" class="form-control"/>
                         </div>
                     
                     
@@ -79,15 +84,13 @@
                     <button class="button special fit" type="submit" name="btInscrireVTT" id="btInscrire">S'inscrire</button>
                     <div style ="text-align: left">
                     <h5>Déja inscrit ? <a style="color:#F64747;" href="http://serveur1.arras-sio.com/symfony4-4059/VTTL/web/index.php?page=connexion">Se connecter</a></h5>
+                    <br/><br/>
                     </div>
                 </form>
-                <h1 class="h1 mb-3 font-weight-normal"> </h1>
-                <h1 class="h1 mb-3 font-weight-normal"> </h1>
+
             </center>
 
 
-            <h1 class="h1 mb-3 font-weight-normal"> </h1>
-            <h1 class="h1 mb-3 font-weight-normal"> </h1>
         </form>
 
     {% endif %}

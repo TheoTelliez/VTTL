@@ -10,7 +10,7 @@
                 <p> <br /><br /><br /></p>
                 <h1 class="h3 mb-3 font-weight-normal">Commentaire envoyé</h1>
                 <h1 class="h3 mb-3 font-weight-normal">Voici votre email : {{form.inputVTTCommentaireidUtilisateur}}</h1>
-                <h1 class="h3 mb-3 font-weight-normal">Voici la date de votre commentaire : {{form.inputVTTCommentaireDate}}</h1>
+                <h1 class="h3 mb-3 font-weight-normal">Voici la date de votre commentaire : {{form.inputVTTCommentaireDate|date("d/m/Y")}}</h1>
                 <h1 class="h3 mb-3 font-weight-normal">Voici le titre de votre commentaire : {{form.inputVTTCommentaireTitre}}</h1>
                 <h1 class="h3 mb-3 font-weight-normal">Voici votre commentaire : {{form.inputVTTCommentaireMessage}}</h1>
                 <p> <br /><h1 class="h3 mb-3 font-weight-normal"><a style="color:#F64747;" href="index.php?page=commentaire">Retourner sur la page de commentaire</a></h1><br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
@@ -25,10 +25,10 @@
     {% endif %}
 
 {% else %}
-
-    <h1 class="h1 mb-3 font-weight-normal"> </h1>
-
+{%if session.login is defined %}
+    
     <center>
+        <h1 class="h1 mb-3 font-weight-normal"> </h1>
         <h2>Commentaire</h2>
         <h3>Insérer un commentaire :</h3>
         <p>Vous pouvez mettre un commentaire sur mon site, chaque commentaire est unique alors n'hésitez pas !<br /> Celui-ci apparaitra sur la page d'accueil si il est récent.</p>
@@ -74,6 +74,17 @@
 </form>
 
 
-{% endif %}      
+{% else %} 
+        <div style="text-align: center">
+        <h1 class="h1"> </h1>
+        <h2>Commentaire</h2>
+        <h3>Insérer un commentaire :</h3>
+        <h1 class="h3 mb-3 font-weight-normal">Echec lors du chargement du formulaire de commentaires</h1>
+            <h1 class="h3 mb-3 font-weight-normal">Erreur : Veuillez vous connecter pour pouvoir envoyer un commentaire</h1>
+            <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=connexion" style="color: #F64747">Me connecter</a></h1>
+        <br/>
+    </div>
+{% endif %}
+{% endif %}     
 
 {% endblock %}

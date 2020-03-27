@@ -1,0 +1,54 @@
+{% extends "base.html.twig" %}
+{% block style %}<link href="css/main.css" rel="stylesheet"> {% endblock %}
+{% block title %} {{ parent() }} Modifier un type {% endblock %}
+
+{% block contenu %}
+
+
+    {% if form.difficulte is defined %}
+
+        {% if form.difficulte != null %}
+
+            <center>
+                <h1 class="h1 mb-3 font-weight-normal"> </h1>
+                <h2>Difficultés</h2>
+                <h3>Modification des difficultés de cours :</h3>
+                <p>Grâce à ce formulaire, modifiez une difficulté sur le site pour créer <a href="index.php?page=cours"> un cours</a> avec une autre difficulté de référencée.</p>
+            </center>
+
+            <form class="form-signin" action="index.php?page=modifdifficulte" method="post"
+                  enctype="application/x-www-form-urlencoded">
+
+                <h1 class="h1 mb-3 font-weight-normal"> </h1>
+
+
+                <label for="inputModifDifficulte" class="sr-only">Nom:</label>
+                <input type="text" id="inputModifDifficulte" name="inputModifDifficulte" class="form-control"
+                       placeholder="Saisir un libelle" value="{{form.difficulte.libelle}}" required autofocus>
+
+                <input type="hidden" name="id" value="{{ form.difficulte.id }}"/>
+                <button class="button special fit" type="submit" name="btModifDifficulte" id="btModifDifficulte">Modifier</button>
+                <br/><br/><br/><br/><br/><br/>
+            </form>
+
+        {% else %}
+            <center>
+                <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1>
+                <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=difficulte" style="color: #F64747">Retourner sur la liste des difficultés</a></h1>
+            </center>
+        {% endif %}
+    {% else %}
+        {% if form.valide == true %}
+            <center>
+                <h1 class="h3 mb-3 font-weight-normal">{{ form.message }} </h1>
+                <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=difficulte" style="color: #F64747">Retourner sur la liste des difficultés</a></h1>
+            </center>
+        {% else %}
+            <center>
+                <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1>
+                <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=difficulte" style="color: #F64747">Retourner sur la liste des difficultés</a></h1>
+            </center>
+        {% endif %}
+
+    {% endif %}
+{% endblock %} 

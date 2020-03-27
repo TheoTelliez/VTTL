@@ -13,52 +13,60 @@
 
         <!-- Contenu -->
         <div class="row">
-            <div style="text-align: left" class="6u 12u small">
+            <div style="text-align: left" class="col-lg-6 col-sm-12">
                 <h3>Mes informations :</h3>
-                <p><u><b>Votre email :</b></u></u> {{form.utilisateur.email}} <br />
+                <p><u><b>Votre email :</b></u> {{form.utilisateur.email}} <br />
                     <u><b>Votre nom :</b></u> {{form.utilisateur.nom}} <br /> 
                     <u><b>Votre prénom :</b></u> {{form.utilisateur.prenom}} <br />
                     <u><b>Votre rôle : </b></u>
                     {%if form.utilisateur.idRole == 1 %} <code> Administrateur </code> {%endif%}
-                    {%if form.utilisateur.idRole == 2 %} <code> Client </code> {%endif%}
+                    {%if form.utilisateur.idRole == 2 %} <code> Vttiste </code> {%endif%}
                     <br />
-                    <u><b>Votre date d'inscription :</b></u> {{form.utilisateur.dateinscription|date("d/M/Y")}} <br />
-                    <u><b>Dernière connexion :</b></u> {{form.utilisateur.datedernier|date("d/M/Y")}} <br />
-                    <u><b>Votre nombre de points :</b></u> 50 <br />
-                    <u><b>Le nombre de quizz effectué :</b></u> 1 <br /><br /><br />
+                    <u><b>Votre date d'inscription :</b></u> {{form.utilisateur.dateinscription|date("d/m/Y")}} <br />
+                    <u><b>Dernière connexion :</b></u> {{form.utilisateur.datedernier|date("d/m/Y")}} (Voir <a href="index.php?page=logsvttl">mes connexions</a>) <br />
+                    <u><b></b></u><br />
+
                     <a href="http://serveur1.arras-sio.com/symfony4-4059/VTTL/web/index.php?page=modifprofil&email={{ form.utilisateur.email }}" class="button alt icon fa-user-edit">Modifier mon profil</a>
                 </p>
-                
+
             </div>
-            <div style="text-align: right" class="6u$ 12u/(small)">
+            <div style="text-align: right" class="col-lg-6 col-sm-12">
                 <h3>Ma photo de profil :</h3>
                 {% if form.utilisateur.photo is not empty %}
-                    <span class="image right"><img height="200" src="images/{{form.utilisateur.photo}}" alt="" /></span><br /><br /><br /><br /><br /><br /><br /><br />
+                    <span class="image right"><img height="200" src="images/{{form.utilisateur.photo}}" alt="" /></span><br /><br /><br /><br /><br /><br /><br /><br /><br />
                     {% endif %} 
                 <a href="index.php?page=modifphoto&email={{ form.utilisateur.email }}" class="button alt icon fa-camera">Édition de la photo</a>
+                <br /><br /><br />
             </div>
 
             <br /><br /><br />
-
+        </div>
+        <div class="row">
             <!-- Break -->
-            <div style="text-align: center" class="4u 12u/(medium)">
+            <div style="text-align: center" class="col-lg-4 col-sm-12">
                 <h3>Un soucis avec votre compte ?</h3>
                 <p>Notre équipe est la pour vous aider <u>dans les 24 heures</u> avec le <a href="index.php?page=contact">formulaire de contact</a> ou directement <a href="mailto:vttlearning@gmail.com">par mail</a> </p>
                 <center><img height="100" src="images/soucis.png" alt="" /></center>
             </div>
-            <div style="text-align: center" class="4u 12u/(medium)">
+            <div style="text-align: center" class="col-lg-4 col-sm-12">
                 <h3>Vous aimez notre site ?</h3>
                 <p>Vous êtes satisfait(e) de notre site et vous voulez nous le faire savoir ? Mettez <a href="index.php?page=commentaire">un commentaire</a> !</p>
                 <center><img height="100" src="images/like.png" alt="" /></center>
-                <br /><br />
-                <a href="index.php?page=deconnexion" class="button alt icon fa-sign-out">Se déconnecter</a>
+
             </div>
-            <div style="text-align: center" class="4u$ 12u/(medium)">
+            <div style="text-align: center" class="col-lg-4 col-sm-12">
                 <h3>Gardons ce lien précieux  !</h3>
                 <p>Vous voulez garder ce précieux lien tissé entre vous et nous ? Rejoignez nous sur <a href="#footer"> nos réseaux sociaux</a>.</p>
                 <center><img height="100" src="images/lien.png" alt="" /></center>
             </div>
         </div>
+        <div class="row">
+            <div style="text-align: center" class="col-lg-12 col-sm-12">
+                <br /><br />
+                <a href="index.php?page=deconnexion" class="button alt icon fa-sign-out">Se déconnecter</a>
+            </div>
+        </div>
+
     </div>
 
 
@@ -68,7 +76,8 @@
 
 
 
-             
+
+
     <h1 class="h1 mb-3 font-weight-normal"> </h1>
 
 {% endblock %}

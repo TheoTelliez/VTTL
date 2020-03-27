@@ -1,0 +1,39 @@
+<page backtop="25mm" backbottom="25mm" backleft="5mm" backright="5mm" footer="page;">
+    <page_footer>
+        <h1 class="h1"> <img src="images/entetevttlpdf.jpg" /></h1>
+    </page_footer>
+    <page_header>
+        <h1 class="h1"> <img src="images/entetevttlpdf.jpg" /></h1>
+    </page_header>
+    <table style="margin-top: 10px;"> 
+        <tr>
+
+            <td>
+                <u>
+                    <h2 style="color: black">Liste des cours disponibles sur VTT Learning au {{ "now"|date("d/m/Y","Europe/Paris") }} :</h2>
+                    <br/><br/>
+                </u>
+            </td>
+
+        </tr>
+
+    </table>
+    <table class="table table-hover table-striped" style=" width: 100%;">
+        <tr>
+            <th style="color:#F64747; width: 25%"><u>Titre :</u></th>
+            <th style="color:#F64747; width: 25%"><u>Difficulté :</u></th>
+            <th style="color:#F64747; width: 25%"><u>Date d'ajout :</u></th>
+            <th style="color:#F64747; width: 25%"><u>Auteur :</u></th>
+        </tr>
+        {% for c in listecours %}
+            <tr>
+                <td>{{c.titre}}</td>
+                <td>{{c.libelledifficulte}}</td>
+                <td>{{c.dateajout|date("d/m/Y")}}</td>
+                <td>{{c.prenom}} {{c.nom}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+</page>
+

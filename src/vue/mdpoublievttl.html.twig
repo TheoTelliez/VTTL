@@ -1,5 +1,6 @@
 {% extends "base.html.twig" %}
-{% block style %}<link href="css/main.css" rel="stylesheet"> {% endblock %}
+{% block style %}
+    <link href="css/main.css" rel="stylesheet"> {% endblock %}
 {% block title %} {{ parent() }} Mot de passe oublié {% endblock %}
 
 {% block contenu %}
@@ -8,17 +9,18 @@
         {% if form.valide == true %}
             <center>
                 <h1 class="h3 mb-3 font-weight-normal">OK</h1>
-                <h1 class="h3 mb-3 font-weight-normal">Voici votre identifiant : {{form.email}}</h1>
+                <h1 class="h3 mb-3 font-weight-normal">Voici votre identifiant : {{ form.email }}</h1>
             </center>
         {% else %}
             <center>
-                <h1 class="h3 mb-3 font-weight-normal">Erreur : {{form.message}}</h1>
-                <h1 class="h3 mb-3 font-weight-normal"><a style="color:#F64747;" href="index.php?page=inscription">S'inscrire</a></h1>
+                <h1 class="h3 mb-3 font-weight-normal">Erreur : {{ form.message }}</h1>
+                <h1 class="h3 mb-3 font-weight-normal"><a style="color:#F64747;" href="index.php?page=inscription">S'inscrire</a>
+                </h1>
                 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
             </center>
         {% endif %}
 
-    {% else %} 
+    {% else %}
 
         <h1 class="h1 mb-3 font-weight-normal"> </h1>
 
@@ -27,16 +29,15 @@
             <h3>Mot de passe oublié ? Pas de panique !</h3>
 
 
-
-            <h1 class="h1 mb-3 font-weight-normal"> </h1> 
+            <h1 class="h1 mb-3 font-weight-normal"> </h1>
 
             <form class="form-signin" action="index.php?page=mdpoublie" method="post"
-                  enctype="application/x-www-form-urlencoded">            
+                  enctype="application/x-www-form-urlencoded">
                 <img src="http://www.lelien.net/wp-content/uploads/2017/09/help.jpg" class="image-ronde">
                 <h6 class="h6 mb-3 font-weight-normal"> </h6>
 
 
-                <label for="inputEmail" class="sr-only">Email:</label>  
+                <label for="inputEmail" class="sr-only">Email:</label>
                 <input type="email" id="inputEmail" name="inputEmail" class="form-control"
                        placeholder="Insérez l'email de votre compte" required autofocus>
 
@@ -45,11 +46,11 @@
                 <button class="button special fit" type="submit" name="btOublie">Envoyer</button>
 
             </form>
-
-            <br/><br/><br/><br/><br/><br/>
-
-
+        </center>
+        <br/><br/><br/><br/><br/><br/>
 
 
-        {% endif %}
-    {% endblock %}    
+
+
+    {% endif %}
+{% endblock %}

@@ -1,5 +1,4 @@
 <?php
-//CODE A ANNOTER !!!
 
 $connect = new PDO("mysql:host=localhost;dbname=dblogin4059VTTL", "login4059", "kFILYMNLotHlbgo"); //Requête de connexion à la BD
 $get_all_table_query = "SHOW TABLES"; //Affichage des tables en SQL
@@ -47,7 +46,7 @@ if (isset($_POST['table'])) { //Si on récupère les tables correctement...
     flush(); //ATTENTION AU FLUSH QUI EST SUPER IMPORTANT !!
     readfile($file_name); //Le readfile c'est pour le téléchargement
     unlink($file_name); //Et la on décharge notre fichier
-    //Commentaires par Théo TELLIEZ (désolé pour les fautes)
+    //Commentaires par Théo TELLIEZ 
 }
 ?>
 <!DOCTYPE html>
@@ -160,7 +159,7 @@ if (isset($_POST['table'])) { //Si on récupère les tables correctement...
 ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>window.jQuery || document.write ( '<script src="js/jquery-3.2.1.min.js"><\/script>')</script>
+    <script>window.jQuery || document.write('<script src="js/jquery-3.2.1.min.js"><\/script>')</script>
     <script src="http://serveur1.arras-sio.com/symfony4-4059/VTTL/web/js/bootstrap.min.js"></script>
     <!-- Scripts -->
     <script src="http://serveur1.arras-sio.com/symfony4-4059/VTTL/web/js/jquery.min.js"></script>
@@ -170,41 +169,9 @@ if (isset($_POST['table'])) { //Si on récupère les tables correctement...
     <script src="http://serveur1.arras-sio.com/symfony4-4059/VTTL/web/js/util.js"></script>
     <script src="http://serveur1.arras-sio.com/symfony4-4059/VTTL/web/js/main.js"></script>
     <script src="http://serveur1.arras-sio.com/symfony4-4059/VTTL/web/js/script.js"></script>
-    
+    <script src="http://serveur1.arras-sio.com/symfony4-4059/VTTL/web/js/tablessql.js"></script>
+    <script src="http://serveur1.arras-sio.com/symfony4-4059/VTTL/web/js/toutcocher.js"></script>
+
 
 </body>
 </html>
-<script>
-    $(document).ready(function(){
-    $('#submit').click(function(){
-    var count = 0;
-    $('.checkbox_table').each(function(){
-    if($(this).is(':checked'))
-    {
-    count = count + 1;
-    }
-    });
-    if(count > 0)
-    {
-    $('#export_form').submit();
-    }
-    else
-    {
-    alert("Merci de sélectionner au moins une table à exporter");
-    return false;
-    }
-    });
-    });
-</script>
-<script >
-    function cocherTout(etat)
-    {
-    var cases = document.getElementsByTagName('input');   // on recupère tous les inputs
-    for(var i=1; i<cases.length; i++)     // on les parcourt
-    if(cases[i].type == 'checkbox')     // si on a une checkbox...
-    {cases[i].checked = etat;}
-    // ... on la coche ou non
-
-
-    }
-</script>
